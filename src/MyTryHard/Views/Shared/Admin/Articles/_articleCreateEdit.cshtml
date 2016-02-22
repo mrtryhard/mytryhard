@@ -1,0 +1,52 @@
+﻿@model MyTryHard.ViewModels.CreateEditArticleViewModel
+@using MyTryHard.Helpers
+<h3>Créer / Éditer un article</h3>
+@using (Html.BeginForm("savearticle", "admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Article.ArticleId)
+    <div>
+        @Html.LabelFor(m => m.Article.Title)<br />
+        @if (!Model.CanDelete)
+        {
+            @Html.TextBoxFor(m => m.Article.Title, new { oninput = "AdminUtils.fillSEOFieldEvent('Article_SEOUrl', 'Article_Title')" })
+        }
+        else
+        {
+            @Html.TextBoxFor(m => m.Article.Title)
+        }
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Article.SEOUrl)<br />
+        @Html.TextBoxFor(m => m.Article.SEOUrl)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Article.CategoryId)<br />
+        @Html.DropDownListForCategories(Model.Categories, Model.Article != null ? Model.Article.CategoryId : Guid.Empty)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Article.Content)<br />
+        @Html.TextAreaFor(m => m.Article.Content)
+    </div>
+    <div>
+        @Html.CheckBoxFor(m => m.Article.IsCommentAllowed)
+        @Html.LabelFor(m => m.Article.IsCommentAllowed)
+    </div>
+    <div>
+        @Html.CheckBoxFor(m => m.Article.IsOnline)
+        @Html.LabelFor(m => m.Article.IsOnline)
+    </div>
+    if (Model.CanDelete)
+    {
+        <div style="float:left;">
+            @Html.CheckBoxFor(m => m.IsToDelete)
+            <span style="color: red;">
+                @Html.LabelFor(m => m.IsToDelete)
+            </span>
+        </div>
+    }
+    <div style="float:right;">
+        <input type="submit" value="Enregistrer" />
+    </div>
+    <div style="clear:both;"></div>
+}

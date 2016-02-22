@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Articles";
+}
+
+<section class="admin-side">
+    <h3>Options</h3>
+    <a data-panel="PanelCreateArticle">Créer un article</a>
+    <a data-panel="PanelListArticles">Tous les Articles</a>
+    <a data-panel="PanelDraftArticles">Brouillons</a>
+    <h3>Recherche</h3>
+    <input name="query" id="searchquery" type="search" placeholder="Titre, auteur, date" />
+    <input type="submit" id="btnSubmitSearch" value="Go" />
+</section>
+<section data-def-panel="PanelListArticles" class="admin-content" id="admin-container"></section>

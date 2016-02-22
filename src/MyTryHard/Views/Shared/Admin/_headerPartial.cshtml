@@ -1,0 +1,10 @@
+﻿<nav class="admin">
+    <ul>
+        <li data-href="@Url.Action("index", "admin")">@Html.ActionLink("Administration", "index", "admin", null, new { @class = "no-style", title = "Administration" })</li>
+        <li data-href="@Url.Action("articles", "admin")">@Html.ActionLink("Articles", "articles", "admin", null, new { @class = "no-style", title = "Articles" })</li>
+        <li data-href="@Url.Action("categories", "admin")">@Html.ActionLink("Catégories", "categories", "admin", null, new { @class = "no-style", title = "Catégories" })</li>
+        <li data-href="@Url.Action("comments", "admin")"><span style="text-decoration:line-through;">@Html.ActionLink("Commentaires", "comments", "admin", null, new { @class = "no-style", title = "Commentaires" })</span></li>
+        <li data-href="@Url.Action("users", "admin")">@Html.ActionLink("Utilisateurs", "users", "admin", null, new { @class = "no-style", title = "Utilisateurs" })</li>
+        <li data-href="@Url.Action("planet", "admin")"><span style="text-decoration:line-through;">@Html.ActionLink("Planète", "planet", "admin", null, new { @class = "no-style", title = "Planète" })</span></li>
+    </ul>
+</nav>

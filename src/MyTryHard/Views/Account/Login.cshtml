@@ -1,0 +1,47 @@
+﻿@using MyTryHard.Models
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<section id="loginForm">
+    <h2>@ViewData["Title"]</h2>
+    @using (Html.BeginForm("login", "account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div>
+            @Html.LabelFor(m => m.Email)
+            <div>
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Password)
+            <div>
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+        </div>
+        <div>
+            @Html.CheckBoxFor(m => m.RememberMe)
+            @Html.LabelFor(m => m.RememberMe)
+        </div>
+        <div>
+            <input type="submit" value="Connexion" class="btn btn-default" />
+        </div>
+        <p>
+            @Html.ActionLink("S'inscrire comme nouvel utilisateur", "Register")
+        </p>
+        @* Activer ceci une fois que la confirmation de votre compte est activée pour la fonctionnalité de réinitialisation du mot de passe
+            <p>
+                @Html.ActionLink("Vous avez oublié votre mot de passe ?", "ForgotPassword")
+            </p>*@
+    }
+</section>
+@*<div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>*@

@@ -1,0 +1,35 @@
+﻿@model MyTryHard.ViewModels.ArticlesViewModel
+@using MyTryHard.Helpers
+<h3>Liste des articles</h3>
+
+@if (Model.Articles.Count == 0)
+{
+    <p class="message">
+        Aucun article
+    </p>
+}
+else
+{
+    <ul class="admin-list">
+        @foreach (Article article in Model.Articles)
+        {
+            <li class="admin-element">
+                <em title="@article.Title">@article.Title.GetEllipsis(50, false)</em>&nbsp;&mdash;&nbsp;
+                @if (article.IsOnline)
+                {
+                    <text>publié le @article.PublishedDate.ToShortDateString()</text>
+                }
+                else
+                {
+                    <text>non publié</text>
+                }
+                <div style="float:right;">
+                    <a class="editable" onclick="SideMenu.onLinkClick(event)" data-panel="PanelEditArticle" data-param="@article.ArticleId">
+                        Éditer
+                    </a>
+                </div>
+                <div style="clear:both;"></div>
+            </li>
+        }
+    </ul>
+}

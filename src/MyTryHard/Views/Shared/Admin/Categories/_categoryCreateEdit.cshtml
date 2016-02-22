@@ -1,0 +1,49 @@
+﻿@model MyTryHard.ViewModels.CreateEditCategoryViewModel
+@using MyTryHard.Helpers
+<h3>Créer / Éditer une catégorie</h3>
+@using (Html.BeginForm("savecategory", "admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Category.CategoryID)
+    @Html.HiddenFor(m => m.IsDefault)
+    <div>
+        @Html.LabelFor(m => m.Category.Title)<br />
+        @if (!Model.CanDelete && !Model.IsDefault)
+        {
+            @Html.TextBoxFor(m => m.Category.Title, new { oninput = "AdminUtils.fillSEOFieldEvent('Category_SEOUrl', 'Category_Title')" })
+        }
+        else
+        {
+            @Html.TextBoxFor(m => m.Category.Title)
+        }
+
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Category.SEOUrl)<br />
+        @Html.TextBoxFor(m => m.Category.SEOUrl)
+    </div>
+    if (!Model.IsDefault)
+    {
+        <div>
+            @Html.LabelFor(m => m.Category.ParentCategoryID)<br />
+            @Html.DropDownListForCategories(Model.Categories, Model.Category != null ? Model.Category.ParentCategoryID : Guid.Empty)
+        </div>
+    }
+    <div>
+        @Html.LabelFor(m => m.Category.Description)<br />
+        @Html.TextBoxFor(m => m.Category.Description)
+    </div>
+    if (Model.CanDelete)
+    {
+        <div style="float:left;">
+            @Html.CheckBoxFor(m => m.IsToDelete)
+            <span style="color: red;">
+                @Html.LabelFor(m => m.IsToDelete)
+            </span>
+        </div>
+    }
+    <div style="float:right;">
+        <input type="submit" value="Enregistrer" />
+    </div>
+    <div style="clear:both;"></div>
+}

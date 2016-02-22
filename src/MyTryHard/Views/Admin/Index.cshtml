@@ -1,0 +1,135 @@
+﻿@model MyTryHard.ViewModels.DashboardViewModel
+@using MyTryHard.Helpers
+
+@{
+    ViewData["Title"] = "Administration - MrTryHard.info";
+}
+
+<h2>Centre de contrôle</h2>
+
+<h3>Options générale</h3>
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    }
+</div>
+
+<h3>Statistiques</h3>
+<div class="dash-info">
+    <div>
+        <header>Articles @Html.ActionLink("→", "articles")</header>
+        <table>
+            <tr>
+                <th colspan="2">Général</th>
+            </tr>
+            <tr>
+                <td>Dernier article:</td>
+                <td><em>@Model.GeneralStats.LastArticleTitle.GetEllipsis(20)</em></td>
+            </tr>
+            <tr>
+                <td>Article populaire:</td>
+                <td><em>N/A@*@Model.PopularArticleTitle.GetEllipsis(20)*@</em></td>
+            </tr>
+            <tr>
+                <th colspan="2">Stats</th>
+            </tr>
+            <tr>
+                <td>Articles publiés: </td>
+                <td>@Model.GeneralStats.PublishedArticleCount</td>
+            </tr>
+            <tr>
+                <td>Articles brouillons:</td>
+                <td>@Model.GeneralStats.DraftArticleCount</td>
+            </tr>
+            <tr>
+                <td>Articles verrouillés:</td>
+                <td>@Model.GeneralStats.LockedArticleCount</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <header>Commentaires @Html.ActionLink("→", "comments")</header>
+        <table>
+            <tr>
+                <th colspan="2">Général</th>
+            </tr>
+            <tr>
+                <td>Dernier commentaire:</td>
+                <td>N/A@*@Model.LastCommentContent.GetEllipsis(20)*@</td>
+            </tr>
+            <tr>
+                <td>Top commenteur:</td>
+                <td>N/A@*@Model.TopCommentingUserName*@</td>
+            </tr>
+            <tr>
+                <th colspan="2">Stats</th>
+            </tr>
+            <tr>
+                <td>Approuvés:</td>
+                <td>N/A@*@Model.ApprovedCommentCount*@</td>
+            </tr>
+            <tr>
+                <td>En attente:</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Commentaires/articles:</td>
+                <td>N/A</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <header>Utilisateurs @Html.ActionLink("→", "users")</header>
+        <table>
+            <tr>
+                <th colspan="2">Général</th>
+            </tr>
+            <tr>
+                <td>Dernier utilisateur:</td>
+                <td>@Model.GeneralStats.LastUserNameRegistered</td>
+            </tr>
+            <tr>
+                <th colspan="2">Stats</th>
+            </tr>
+            <tr>
+                <td>Utilisateurs inscrits:</td>
+                <td>@Model.GeneralStats.RegisteredUserCount</td>
+            </tr>
+            <tr>
+                <td>Utilisateurs non validés:</td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td>Utilisateurs bannis:</td>
+                <td>@Model.GeneralStats.BannedUserCount</td>
+            </tr>
+        </table>
+
+    </div>
+    <div>
+        <header>Planète @Html.ActionLink("→", "planet")</header>
+        <table>
+            <tr>
+                <th colspan="2">General</th>
+            </tr>
+            <tr>
+                <td>Populaire:</td>
+                <td>N/A@*@Model.PopularPlanetName*@</td>
+            </tr>
+            <tr>
+                <td>Top cliqueur:</td>
+                <td>N/A@*@Model.TopClickerUserName*@</td>
+            </tr>
+            <tr>
+                <th colspan="2">Stats</th>
+            </tr>
+            <tr>
+                <td>Cliques:</td>
+                <td>N/A@*@Model.TotalPlanetClickCount*@</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div style="clear:both;"></div>

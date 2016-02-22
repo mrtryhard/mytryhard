@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Category>
+@using MyTryHard.Models
+
+<select name="CategoryId" id="CategoryId">
+    @foreach (Category cat in Model)
+    {
+        string selected = ((Guid)ViewData["Selected"] == cat.CategoryID) ? "selected" : "";
+        string parentStyle = (cat.ParentCategoryID == Guid.Empty) ? "font-weight: bold;" : "";
+
+        <text>
+        <option value="@cat.CategoryID" style="@parentStyle" selected="@selected">
+            @cat.Title
+        </option>
+        </text>
+    }
+</select>

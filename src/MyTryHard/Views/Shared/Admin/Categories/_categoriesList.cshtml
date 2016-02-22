@@ -1,0 +1,19 @@
+﻿@model MyTryHard.ViewModels.CategoriesViewModel
+@using MyTryHard.Helpers
+<h3>Liste des catégories</h3>
+
+<ul class="admin-list">
+    @foreach (Category cat in Model.Categories)
+    {
+        <li class="admin-element">
+            <em>@cat.Title</em>&nbsp;&mdash;&nbsp;
+            @cat.Description.GetEllipsis(20)
+            <div style="float:right;">
+                <a class="editable" onclick="SideMenu.onLinkClick(event)" data-panel="PanelEditCategory" data-param="@cat.CategoryID">
+                    Éditer
+                </a>
+            </div>
+            <div style="clear:both;"></div>
+        </li>
+    }
+</ul>

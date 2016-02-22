@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - MyTryHard</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/css/style.main.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/style.main.min.css" asp-append-version="true" />
+    </environment>
+    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li data-href="@Url.Action("index", "home")">@Html.ActionLink("Accueil", "index", "home", null, new { @class = "no-style", title = "Accueil" })</li>
+                <li data-href="@Url.Action("articles", "home")">@Html.ActionLink("Articles", "articles", "home", null, new { @class = "no-style", title = "Articles" })</li>
+                <li data-href="@Url.Action("planet", "home")"><span style="text-decoration:line-through;">@Html.ActionLink("Planète", "planet", "home", null, new { @class = "no-style", title = "Planète" })</span></li>
+                <li data-href="@Url.Action("about", "home")">@Html.ActionLink("À propos", "about", "home", null, new { @class = "no-style", title = "À propos" })</li>
+            </ul>
+        </nav>
+
+        @* Panel d'administration *@
+        @if (User.Identity.IsAuthenticated
+        && User.IsInRole("Admin")
+        && ViewContext.RouteData.Values["controller"].ToString().ToLower() == "admin")
+        {
+            { await Html.RenderPartialAsync("Admin/_headerPartial"); }
+        }
+
+        <div class="login">
+            @{await Html.RenderPartialAsync("_LoginPartial");}
+        </div>
+
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>
+        &copy; MrTryHard.info @DateTime.Now.Year
+        <div class="lnk">
+            <a class="lnk github" href="https://github.com/mrtryhard">mrtryhard</a> ―
+            <a class="lnk twitter" href="https://twitter.com/iammrtryhard">iammrtryhard</a>
+        </div>
+    </footer>
+
+    <environment names="Development">
+        <script src="~/js/utils.js" asp-append-version="true"></script>
+        <script src="~/js/main.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/js/utils.min.js" asp-append-version="true"></script>
+        <script src="~/js/main.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @if (User.Identity.IsAuthenticated
+    && User.IsInRole("Admin")
+    && ViewContext.RouteData.Values["controller"].ToString().ToLower() == "admin")
+    {
+        <text>
+        <environment names="Development">
+            <script src="~/js/admin.js" asp-append-version="true"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="~/js/admin.min.js" asp-append-version="true"></script>
+        </environment>
+        </text>
+    }
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

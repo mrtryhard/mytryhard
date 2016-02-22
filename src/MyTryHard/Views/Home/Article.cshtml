@@ -1,0 +1,21 @@
+﻿@model Article
+@using MyTryHard.Helpers
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<article>
+    <h2>@Model.Title</h2>
+    <p class="information">
+        Publié dans <a href="@Url.Action("category")/@Model.SEOUrl">@Model.CategoryTitle</a> le @Model.PublishedDate.ToShortDateString() par <a href="@Url.Action("user")/@Model.AuthorName">@Model.AuthorName</a><br />
+        @if (Model.LastEditDate.AreDiffrentBy(Model.PublishedDate, new TimeSpan(0, 10, 0)))
+        {
+            <small>Dernière édition le @Model.LastEditDate.ToShortDateString()</small>
+        }
+    </p>
+    <p class="content">
+        @Model.Content
+    </p>
+</article>
+
+@*Section des commentaires ici.*@

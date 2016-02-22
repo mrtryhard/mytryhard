@@ -1,0 +1,43 @@
+﻿@model RegisterViewModel
+@{
+    ViewBag.Title = "Inscription";
+}
+
+<section id="registerForm">
+    <h2>@ViewData["Title"]</h2>
+
+    @using (Html.BeginForm("register", "account", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+        <div>
+            @Html.LabelFor(m => m.UserName)
+            <div>
+                @Html.TextBoxFor(m => m.UserName)
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Email)
+            <div>
+                @Html.TextBoxFor(m => m.Email)
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Password)
+            <div>
+                @Html.PasswordFor(m => m.Password)
+            </div>
+        </div>
+        <div>
+            @Html.LabelFor(m => m.ConfirmPassword)
+            <div>
+                @Html.PasswordFor(m => m.ConfirmPassword)
+            </div>
+        </div>
+        <div>
+            <div>
+                <input type="submit" value="S’inscrire" />
+            </div>
+        </div>
+    }
+</section>
