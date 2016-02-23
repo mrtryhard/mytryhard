@@ -43,6 +43,4 @@ See `LICENSE.md`.
 
 
 ### Other stuff
-The website does make use of OpenSans font, which I won't distribute here, although I used it locally. 
-
 All icons (LinkedIn, Github, Twitter, USherbrooke), fonts (OpenSans from Google) are trademarks of their respective creators / owners. 
