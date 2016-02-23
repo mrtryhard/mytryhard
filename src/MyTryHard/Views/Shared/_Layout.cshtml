@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="~/css/style.main.css" />
     </environment>
     <environment names="Staging,Production">
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="false" />
     </environment>
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
 </head>
@@ -56,7 +56,7 @@
         <script src="~/js/main.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="false"></script>
     </environment>
 
     @if (User.Identity.IsAuthenticated
@@ -68,7 +68,7 @@
             <script src="~/js/admin.js" asp-append-version="true"></script>
         </environment>
         <environment names="Staging,Production">
-            <script src="~/js/admin.min.js" asp-append-version="true"></script>
+            <script src="~/js/admin.min.js" asp-append-version="false"></script>
         </environment>
         </text>
     }
