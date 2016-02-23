@@ -1,4 +1,4 @@
-﻿/// <binding Clean='clean' />
+﻿/// <binding BeforeBuild='min, min:css, min:js, min:jsadmin' Clean='clean' />
 "use strict";
 
 var gulp = require("gulp"),
@@ -33,6 +33,13 @@ gulp.task("min:js", function () {
         .pipe(concat(paths.concatJsDest))
         .pipe(uglify())
         .pipe(gulp.dest("."));
+});
+
+gulp.task("min:jsadmin", function () {
+    return gulp.src([paths.webroot + "js/admin.js", "!" + paths.webroot + "js/**/admin.min.js"])
+    .pipe(concat(paths.webroot + "js/admin.min.js"))
+    .pipe(uglify())
+    .pipe(gulp.dest("."));
 });
 
 gulp.task("min:css", function () {
