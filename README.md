@@ -1,10 +1,15 @@
 ##MyTryHard
 by [mrtryhard](https://github.com/mrtryhard)
   
-My simple personnal website (Not yet deployed). It allows to publish, edit and delete articles, manage categories, 
+My simple personnal [website](https://www.mrtryhard.info/).  
+It allows to publish, edit and delete articles, manage categories with a
 simple user interface and simple admin panel with stats.
   
-It is programmed with C# in ASP.Net 5 MVC 6.
+It is programmed with C# in ASP.Net 5 MVC 6 (ASP.Net 5 rc1).  
+It works on both Ubuntu LTS 14.04 and Windows 8.  
+  
+All issues encountered will probably either feature as a blog entry or as a wiki entry on this repo
+if it is considered useful.
 
 Do not hesitate to file bug reports / pull requests.
 
