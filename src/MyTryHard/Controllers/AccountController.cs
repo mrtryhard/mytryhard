@@ -191,7 +191,7 @@ namespace MyTryHard.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl = null)
         {
-            if (User.IsSignedIn())
+            if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction(nameof(ManageController.Index), "Manage");
             }

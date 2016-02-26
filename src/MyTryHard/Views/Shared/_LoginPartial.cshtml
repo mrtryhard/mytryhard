@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @using System.Security.Claims
 
-@if (User.IsSignedIn())
+@if (User.Identity.IsAuthenticated)
 {
     using (Html.BeginForm("logoff", "account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
@@ -10,12 +10,12 @@
             <a class="lnk" href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a>
         </span>
 
-        @*if (UserHelper.HasRoleForCurrentUser("Admin"))
+        if (User.IsInRole("Admin"))
         {
             <span class="element">
                 @Html.ActionLink("Administration", "index", "admin", routeValues: null, htmlAttributes: new { @class = "lnk", title = "Administration" })
             </span>
-        }*@
+        }
 
         <span class="element">
             @Html.ActionLink("Préférences", "index", "manage", routeValues: null, htmlAttributes: new { @class = "lnk", title = "Manage" })

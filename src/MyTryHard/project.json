@@ -28,12 +28,16 @@
         "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
         "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
+        "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-rc1-final",
+        "Microsoft.AspNet.Authorization": "1.0.0-rc1-final",
+        "runtime.linux.System.Net.NetworkInformation": "4.1.0-beta-23516",
+        "runtime.unix.System.Net.Security": "4.0.0-beta-23516",
         "Npgsql": "3.1.0-alpha6",
         "Kestrel": "1.0.0-*"
     },
 
     "commands": {
-        "web": "Microsoft.AspNet.Server.Kestrel",
+        "web": "Microsoft.AspNet.Server.Kestrel --server.urls http://locahost:5004/",
         "ef": "EntityFramework.Commands",
         "kestrel": "Microsoft.AspNet.Server.Kestrel --server Kestrel --server.urls http://*:5004"
     },
