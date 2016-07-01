@@ -80,7 +80,8 @@ namespace MyTryHard
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/error");
+                app.UseStatusCodePagesWithRedirects("/error/{0}");
 
                 // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
                 try
@@ -105,6 +106,9 @@ namespace MyTryHard
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "ErrorPage",
+                    template: "{controller=error}/{action=index}/{errorCode:int}");
                 routes.MapRoute(
                     name: "ArticlesNavigation",
                     template: "{controller=home}/{action=index}/{page}");
