@@ -40,7 +40,7 @@ procedures in the right schema.*
 In the `src/appsettings.json` file, you must give a valid Postgresql connection string.  The format
 is as follows:  
 ```
-Host={IP_ADDRESS};Port=5432;Database={DATABASE};User Id={USER};Password={PASSWORD};
+Host={IP_ADDRESS};Port=5432;Database={DATABASE};User Id={USER};Password={PASSWORD};Persist Security Info=true
 ```
 
 ### Licensing
