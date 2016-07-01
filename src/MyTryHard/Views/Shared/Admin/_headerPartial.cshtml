@@ -1,10 +1,26 @@
 ﻿<nav class="admin">
     <ul>
-        <li data-href="@Url.Action("index", "admin")">@Html.ActionLink("Administration", "index", "admin", null, new { @class = "no-style", title = "Administration" })</li>
-        <li data-href="@Url.Action("articles", "admin")">@Html.ActionLink("Articles", "articles", "admin", null, new { @class = "no-style", title = "Articles" })</li>
-        <li data-href="@Url.Action("categories", "admin")">@Html.ActionLink("Catégories", "categories", "admin", null, new { @class = "no-style", title = "Catégories" })</li>
-        <li data-href="@Url.Action("comments", "admin")"><span style="text-decoration:line-through;">@Html.ActionLink("Commentaires", "comments", "admin", null, new { @class = "no-style", title = "Commentaires" })</span></li>
-        <li data-href="@Url.Action("users", "admin")">@Html.ActionLink("Utilisateurs", "users", "admin", null, new { @class = "no-style", title = "Utilisateurs" })</li>
-        <li data-href="@Url.Action("planet", "admin")"><span style="text-decoration:line-through;">@Html.ActionLink("Planète", "planet", "admin", null, new { @class = "no-style", title = "Planète" })</span></li>
+        <li data-href="@Url.Action("index", "admin")">
+            <a asp-controller="admin" asp-action="index" class="no-style" title="Administration">Administration</a>
+        </li>
+        <li data-href="@Url.Action("articles", "admin")">
+            <a asp-controller="admin" asp-action="articles" class="no-style" title="Articles">Articles</a>
+        </li>
+        <li data-href="@Url.Action("categories", "admin")">
+            <a asp-controller="admin" asp-action="categories" class="no-style" title="Catégories">Catégories</a>
+        </li>
+        <li data-href="@Url.Action("comments", "admin")">
+            <span style="text-decoration:line-through;">
+                <a asp-controller="admin" asp-action="comments" class="no-style" title="Commentaires">Commentaires</a>
+            </span>
+        </li>
+        <li data-href="@Url.Action("users", "admin")">
+            <a asp-controller="admin" asp-action="users" class="no-style" title="Utilisateurs">Utilisateurs</a>
+        </li>
+        <li data-href="@Url.Action("planet", "admin")">
+            <span style="text-decoration:line-through;">
+                <a asp-controller="admin" asp-action="planet" class="no-style" title="Planète">Planète</a>
+            </span>
+        </li>
     </ul>
 </nav>
