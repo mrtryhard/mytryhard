@@ -5,7 +5,7 @@ My simple personnal [website](https://www.mrtryhard.info/).
 It allows to publish, edit and delete articles, manage categories with a
 simple user interface and simple admin panel with stats.
   
-It is programmed with C# in Asp.Net Core 
+It is programmed with C# in Asp.Net Core.  
 It works on both Ubuntu LTS 14.04 and Windows 8.  
   
 All issues encountered will probably either feature as a blog entry or as a wiki entry on this repo
