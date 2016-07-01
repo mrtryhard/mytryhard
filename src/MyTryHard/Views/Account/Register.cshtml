@@ -5,33 +5,30 @@
 
 <section id="registerForm">
     <h2>@ViewData["Title"]</h2>
-
-    @using (Html.BeginForm("register", "account", FormMethod.Post, new { role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary()
+    <form asp-controller="account" asp-action="register" method="post" role="form">
+        <div asp-validation-summary="All"></div>
         <div>
-            @Html.LabelFor(m => m.UserName)
+            <label asp-for="UserName"></label>
             <div>
-                @Html.TextBoxFor(m => m.UserName)
+                <input asp-for="UserName" />
             </div>
         </div>
         <div>
-            @Html.LabelFor(m => m.Email)
+            <label asp-for="Email"></label>
             <div>
-                @Html.TextBoxFor(m => m.Email)
+                <input asp-for="Email" />
             </div>
         </div>
         <div>
-            @Html.LabelFor(m => m.Password)
+            <label asp-for="Password"></label>
             <div>
-                @Html.PasswordFor(m => m.Password)
+                <input type="password" asp-for="Password" />
             </div>
         </div>
         <div>
-            @Html.LabelFor(m => m.ConfirmPassword)
+            <label asp-for="ConfirmPassword"></label>
             <div>
-                @Html.PasswordFor(m => m.ConfirmPassword)
+                <input type="password" asp-for="ConfirmPassword" />
             </div>
         </div>
         <div>
@@ -39,5 +36,5 @@
                 <input type="submit" value="S’inscrire" />
             </div>
         </div>
-    }
+    </form>
 </section>
