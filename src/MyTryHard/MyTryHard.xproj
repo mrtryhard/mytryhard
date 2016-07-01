@@ -8,8 +8,9 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>958ba5f7-5501-41bd-86ed-5b3c3d09a691</ProjectGuid>
     <RootNamespace>MyTryHard</RootNamespace>
-    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
-    <OutputPath Condition="'$(OutputPath)'=='' ">..\..\artifacts\bin\$(MSBuildProjectName)\</OutputPath>
+    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
+    <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>

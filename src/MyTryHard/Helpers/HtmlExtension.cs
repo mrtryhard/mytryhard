@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNet.Html.Abstractions;
-using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.AspNet.Mvc.ViewFeatures;
+﻿using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using MyTryHard.Models;
 using System;
 using System.Collections.Generic;

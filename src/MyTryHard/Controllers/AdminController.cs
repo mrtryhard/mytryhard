@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MyTryHard.FiltersAttributes;
 using MyTryHard.Models;
 using MyTryHard.ViewModels;
@@ -85,7 +85,7 @@ namespace MyTryHard.Controllers
             Article article = ceavm.Article;
             article.ArticleId = article.ArticleId != Guid.Empty ? article.ArticleId : Guid.NewGuid();
             article.AuthorName = User.Identity.Name;
-            article.AuthorId = new Guid(User.GetUserId());
+            article.AuthorId = new Guid(HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             DateTime dtNow = DateTime.Now;
             article.PublishedDate = article.IsOnline ? dtNow : DateTime.MaxValue;

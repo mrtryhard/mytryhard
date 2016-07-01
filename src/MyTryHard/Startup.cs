@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Data.Entity;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MyTryHard.Models;
 using MyTryHard.Services;
+using Npgsql;
+using System.IO;
 
 namespace MyTryHard
 {
@@ -17,7 +20,8 @@ namespace MyTryHard
             // Set up configuration sources.
 
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
             if (env.IsDevelopment())
@@ -41,16 +45,19 @@ namespace MyTryHard
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddEntityFramework()
-                .AddNpgsql()
-                .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
+            //services.AddEntityFrameworkNpgsql()
+            //    .AddDbContext<ApplicationDbContext>(options =>
+            //        options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
+
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddMvcCore();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -88,8 +95,6 @@ namespace MyTryHard
                 catch { }
             }
 
-            app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
-
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseStaticFiles();
@@ -108,8 +113,5 @@ namespace MyTryHard
                     template: "{controller=home}/{action=index}/{id?}");
             });
         }
-
-        // Entry point for the application.
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

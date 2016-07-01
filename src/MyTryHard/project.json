@@ -1,39 +1,54 @@
 {
-  "userSecretsId": "aspnet5-MyTryHard-122bad79-16ff-4f9b-a56a-701ea5eb4ec7",
-  "version": "1.0.0-*",
-  "compilationOptions": {
-    "emitEntryPoint": true
-  },
+    "userSecretsId": "aspnet5-MyTryHard-122bad79-16ff-4f9b-a56a-701ea5eb4ec7",
+    "version": "1.0.0",
+    "buildOptions": {
+        "emitEntryPoint": true,
+        "preserveCompilationContext": true
+    },
+
+    "frameworks": {
+        "netcoreapp1.0": {
+            "imports": [
+                "dotnet5.6",
+                "portable-net45+win8"
+            ]
+        }
+    },
 
     "dependencies": {
-        "EntityFramework.Commands": "7.0.0-rc1-final",
-        "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
-        "EntityFramework7.Npgsql": "3.1.0-rc1-3",
-        "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1",
-        "Microsoft.AspNet.Authentication.Cookies": "1.0.0-rc1-final",
-        "Microsoft.AspNet.Diagnostics.Entity": "7.0.0-rc1-final",
-        "Microsoft.AspNet.Identity": "3.0.0-rc1-final",
-        "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
-        "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
-        "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
-        "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-rc1-final",
-        "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
-        "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
-        "Microsoft.AspNet.Tooling.Razor": "1.0.0-rc1-final",
-        "Microsoft.Extensions.CodeGenerators.Mvc": "1.0.0-rc1-final",
+        "BundlerMinifier.Core": "2.1.258",
+        "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
+        "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
+        "Microsoft.AspNetCore.Authorization": "1.0.0",
+        "Microsoft.AspNetCore.Diagnostics": "1.0.0",
+        "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
+        "Microsoft.AspNetCore.Identity": "1.0.0",
+        "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
+        "Microsoft.AspNetCore.Mvc": "1.0.0",
+        "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0",
+        "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
+        "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+        "Microsoft.AspNetCore.StaticFiles": "1.0.0",
+        "Microsoft.EntityFrameworkCore.Tools": {
+            "version": "1.0.0-preview2-final",
+            "type": "build"
+        },
         "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc1-final",
-        "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
-        "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
-        "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
-        "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
-        "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
-        "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
-        "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-rc1-final",
-        "Microsoft.AspNet.Authorization": "1.0.0-rc1-final",
+        "Microsoft.Extensions.Configuration.Json": "1.0.0",
+        "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
+        "Microsoft.Extensions.Logging": "1.0.0",
+        "Microsoft.Extensions.Logging.Console": "1.0.0",
+        "Microsoft.Extensions.Logging.Debug": "1.0.0",
+        "Microsoft.NETCore.App": {
+            "version": "1.0.0",
+            "type": "platform"
+        },
+        "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+        "Npgsql": "3.1.5",
+        "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0",
+        "Microsoft.EntityFrameworkCore.Relational": "1.0.0",
         "runtime.linux.System.Net.NetworkInformation": "4.1.0-beta-23516",
-        "runtime.unix.System.Net.Security": "4.0.0-beta-23516",
-        "Npgsql": "3.1.0-alpha6",
-        "Kestrel": "1.0.0-*"
+        "runtime.unix.System.Net.Security": "4.0.0-beta-23516"
     },
 
     "commands": {
@@ -42,23 +57,38 @@
         "kestrel": "Microsoft.AspNet.Server.Kestrel --server Kestrel --server.urls http://*:5004"
     },
 
-  "frameworks": {
-    "dnx451": {
-        "dependencies": {
+    "tools": {
+        "BundlerMinifier.Core": "2.0.238",
+        "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final",
+        "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
+    },
+
+    "runtimeOptions": {
+        "configProperties": {
+            "System.GC.Server": true
         }
     },
-    "dnxcore50": { }
-  },
 
-  "exclude": [
-    "wwwroot",
-    "node_modules"
-  ],
-  "publishExclude": [
-    "**.user",
-    "**.vspscc"
-  ],
-  "scripts": {
-    "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ]
-  }
+    "publishOptions": {
+        "include": [
+            "wwwroot",
+            "Views",
+            "Areas/**/Views",
+            "appsettings.json",
+            "web.config"
+        ],
+        "exclude": [
+            "**.user",
+            "**.vspscc"
+        ]
+    },
+
+    "scripts": {
+        "prepublish": [ "bower install", "dotnet bundle" ],
+        "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+    }
+
+    //"scripts": {
+    //    "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ]
+    //}
 }

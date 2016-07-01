@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using MyTryHard.ViewModels;
 using MyTryHard.Models;
 using MyTryHard.Bll;

@@ -5,7 +5,7 @@ My simple personnal [website](https://www.mrtryhard.info/).
 It allows to publish, edit and delete articles, manage categories with a
 simple user interface and simple admin panel with stats.
   
-It is programmed with C# in ASP.Net 5 MVC 6 (ASP.Net 5 rc1).  
+It is programmed with C# in Asp.Net Core 
 It works on both Ubuntu LTS 14.04 and Windows 8.  
   
 All issues encountered will probably either feature as a blog entry or as a wiki entry on this repo
@@ -16,13 +16,13 @@ Do not hesitate to file bug reports / pull requests.
 **Directories**  
  
 * `sql/` contains everything sql-related (duh!). It does contains initialization scripts (create\_scripts) and stored procedures (stored\_procs).   
-* `MyTryHard/` contains the ASP.NET5 MVC6 solution. 
+* `MyTryHard/` contains the Asp.Net Core solution. 
 
 **Dependencies**  
 While NuGet should do its job, here's what it takes to run this.  
 
 * Visual Studio 2015 is absolutely required  
-* Npgsql 3.1.0-alpha6
+* Npgsql 3.1.5
 * EntityFramework7 with Npgsql support
 * PostgreSql 9.1 onward  
 
