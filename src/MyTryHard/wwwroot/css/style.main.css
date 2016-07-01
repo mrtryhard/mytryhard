@@ -1,15 +1,13 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-body {
-}
-
-html {
-}
 
 body {
     font-family: "Open Sans", Helvetica, Calibri, Serif;
     min-width: 20em;
     max-width: 50em;
     margin: 0 auto;
+}
+
+html {
 }
 
 a.no-style,
@@ -155,6 +153,16 @@ footer {
     }
 
 /* General */
+button.lnk {
+    color: #00E;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    font-family: inherit;
+}
+
 a {
     color: #00E;
     text-decoration: none;
@@ -164,7 +172,7 @@ a {
         text-decoration: underline;
     }
 
-    a.lnk {
+    a.lnk, button.lnk {
         display: inline-block;
         background-size: 20px 20px;
         line-height: 25px;
@@ -174,11 +182,12 @@ a {
         text-decoration: none;
     }
 
-        a.lnk:hover {
+        a.lnk:hover, button.lnk:hover {
             text-decoration: underline;
+            cursor: pointer;
         }
 
-        a.lnk:visited {
+        a.lnk:visited, button.lnk:visited {
             color: #00E;
         }
 

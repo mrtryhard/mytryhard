@@ -125,8 +125,8 @@ namespace MyTryHard.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
         [ValidateAntiForgeryToken]
+        [HttpPost]
         public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();

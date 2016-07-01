@@ -1,33 +1,34 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
 
-@if (User.Identity.IsAuthenticated)
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
 {
-    using (Html.BeginForm("logoff", "account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-        @Html.AntiForgeryToken()
+    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <span class="element">
-            <a class="lnk" href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a>
+            <button type="submit" asp-controller="Account" asp-action="LogOff" class="lnk">Se déconnecter</button>
         </span>
 
-        if (User.IsInRole("Admin"))
+        @if (User.IsInRole("Admin"))
         {
             <span class="element">
-                @Html.ActionLink("Administration", "index", "admin", routeValues: null, htmlAttributes: new { @class = "lnk", title = "Administration" })
+                <a asp-controller="Admin" asp-action="Index" class="lnk" title="Administration">Administration</a>
             </span>
         }
 
         <span class="element">
-            @Html.ActionLink("Préférences", "index", "manage", routeValues: null, htmlAttributes: new { @class = "lnk", title = "Manage" })
+            <a asp-controller="Manage" asp-action="Index" class="lnk" title="Préférences">Préférences</a>
         </span>
-    }
+    </form>
 }
 else
 {
     <span class="element">
-        @Html.ActionLink("S’inscrire", "register", "account", routeValues: null, htmlAttributes: new { @class = "lnk", id = "registerLink" })
+        <a asp-area="" asp-controller="Account" asp-action="Register" class="lnk" id="registerLink">S'inscrire</a>
     </span>
     <span class="element">
-        @Html.ActionLink("Se connecter", "login", "account", routeValues: null, htmlAttributes: new { @class = "lnk", id = "loginLink" })
+        <a asp-area="" asp-controller="Account" asp-action="Login" class="lnk" id="loginLink">Se connecter</a>
     </span>
 }

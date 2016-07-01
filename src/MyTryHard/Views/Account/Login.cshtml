@@ -6,42 +6,38 @@
 
 <section id="loginForm">
     <h2>@ViewData["Title"]</h2>
-    @using (Html.BeginForm("login", "account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
+    <form asp-area="" asp-controller="Account" asp-action="login" asp-route-returnurl="ViewBag.ReturnUrl" method="post" role="form">
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div>
-            @Html.LabelFor(m => m.Email)
+            <label asp-for="Email"></label>
             <div>
-                @Html.TextBoxFor(m => m.Email)
-                @Html.ValidationMessageFor(m => m.Email)
+                <input asp-for="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
         </div>
         <div>
-            @Html.LabelFor(m => m.Password)
+            <label asp-for="Password"></label>
             <div>
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
+                <input asp-for="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
         </div>
         <div>
-            @Html.CheckBoxFor(m => m.RememberMe)
-            @Html.LabelFor(m => m.RememberMe)
+            <label asp-for="RememberMe">
+                <input asp-for="RememberMe" />
+                @Html.DisplayNameFor(m => m.RememberMe)
+            </label>
         </div>
         <div>
             <input type="submit" value="Connexion" class="btn btn-default" />
         </div>
         <p>
-            @Html.ActionLink("S'inscrire comme nouvel utilisateur", "Register")
+            <a asp-controller="Account" asp-action="Register">S'inscrire comme nouvel utilisateur</a>
         </p>
         @* Activer ceci une fois que la confirmation de votre compte est activée pour la fonctionnalité de réinitialisation du mot de passe
             <p>
                 @Html.ActionLink("Vous avez oublié votre mot de passe ?", "ForgotPassword")
             </p>*@
-    }
+
+    </form>
 </section>
-@*<div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>*@

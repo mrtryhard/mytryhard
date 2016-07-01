@@ -13,18 +13,15 @@
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Changer votre mot de passe", "ChangePassword")
+                <a asp-action="ChangePassword">Changer votre mot de passe</a>
+                @*@Html.ActionLink("Changer votre mot de passe", "ChangePassword")*@
             }
             else
             {
-                @Html.ActionLink("Créer", "SetPassword")
+                <a asp-action="SetPassword">Créer</a>
+                @*@Html.ActionLink("Créer", "SetPassword")*@
             }
             ]
         </dd>
-        @*<dt>Connexions externes :</dt>
-            <dd>
-                @Model.Logins.Count [
-                @Html.ActionLink("Gérer", "ManageLogins") ]
-            </dd>*@
     </dl>
 </div>

@@ -3,5 +3,6 @@
 @using MyTryHard.ViewModels.Account
 @using MyTryHard.ViewModels.Manage
 @using Microsoft.AspNetCore.Identity
-@addTagHelper "*, Microsoft.AspNetCore.Mvc"
+using AuthoringTagHelpers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration TelemetryConfiguration
