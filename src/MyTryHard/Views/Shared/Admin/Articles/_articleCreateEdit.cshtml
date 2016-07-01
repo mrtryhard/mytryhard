@@ -1,47 +1,48 @@
 ﻿@model MyTryHard.ViewModels.CreateEditArticleViewModel
 @using MyTryHard.Helpers
 <h3>Créer / Éditer un article</h3>
-@using (Html.BeginForm("savearticle", "admin", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.Article.ArticleId)
+<form asp-controller="admin" asp-action="savearticle" method="post">
+    <input type="hidden" asp-for="Article.ArticleId" />
     <div>
-        @Html.LabelFor(m => m.Article.Title)<br />
+        <label asp-for="Article.Title"></label><br />
         @if (!Model.CanDelete)
         {
-            @Html.TextBoxFor(m => m.Article.Title, new { oninput = "AdminUtils.fillSEOFieldEvent('Article_SEOUrl', 'Article_Title')" })
+            <input asp-for="Article.Title" oninput="AdminUtils.fillSEOFieldEvent('Article_SEOUrl', 'Article_Title')" />
         }
         else
         {
-            @Html.TextBoxFor(m => m.Article.Title)
+            <input asp-for="Article.Title" />
         }
     </div>
     <div>
-        @Html.LabelFor(m => m.Article.SEOUrl)<br />
-        @Html.TextBoxFor(m => m.Article.SEOUrl)
+        <label asp-for="Article.SEOUrl"></label>
+        <br />
+        <input asp-for="Article.SEOUrl" />
     </div>
     <div>
-        @Html.LabelFor(m => m.Article.CategoryId)<br />
+        <label asp-for="Article.CategoryId"></label>
+        <br />
         @Html.DropDownListForCategories(Model.Categories, Model.Article != null ? Model.Article.CategoryId : Guid.Empty)
     </div>
     <div>
-        @Html.LabelFor(m => m.Article.Content)<br />
-        @Html.TextAreaFor(m => m.Article.Content)
+        <label asp-for="Article.Content"></label>
+        <br />
+        <textarea asp-for="Article.Content"></textarea>
     </div>
     <div>
-        @Html.CheckBoxFor(m => m.Article.IsCommentAllowed)
-        @Html.LabelFor(m => m.Article.IsCommentAllowed)
+        <input type="checkbox" for="Article.IsCommentAllowed" />
+        <label asp-for="Article.IsCommentAllowed"></label>
     </div>
     <div>
-        @Html.CheckBoxFor(m => m.Article.IsOnline)
-        @Html.LabelFor(m => m.Article.IsOnline)
+        <input type="checkbox" asp-for="Article.IsOnline" />
+        <label asp-for="Article.IsOnline"></label>
     </div>
-    if (Model.CanDelete)
+    @if (Model.CanDelete)
     {
         <div style="float:left;">
-            @Html.CheckBoxFor(m => m.IsToDelete)
+            <input type="checkbox" asp-for="IsToDelete" />
             <span style="color: red;">
-                @Html.LabelFor(m => m.IsToDelete)
+                <label asp-for="IsToDelete"></label>
             </span>
         </div>
     }
@@ -49,4 +50,4 @@
         <input type="submit" value="Enregistrer" />
     </div>
     <div style="clear:both;"></div>
-}
+</form>

@@ -8,27 +8,27 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <span class="element">
-            <button type="submit" asp-controller="Account" asp-action="LogOff" class="lnk">Se déconnecter</button>
+            <button type="submit" asp-controller="account" asp-action="logoff" class="lnk">Se déconnecter</button>
         </span>
 
         @if (User.IsInRole("Admin"))
         {
             <span class="element">
-                <a asp-controller="Admin" asp-action="Index" class="lnk" title="Administration">Administration</a>
+                <a asp-controller="admin" asp-action="Index" class="lnk" title="Administration">Administration</a>
             </span>
         }
 
         <span class="element">
-            <a asp-controller="Manage" asp-action="Index" class="lnk" title="Préférences">Préférences</a>
+            <a asp-controller="manage" asp-action="index" class="lnk" title="Préférences">Préférences</a>
         </span>
     </form>
 }
 else
 {
     <span class="element">
-        <a asp-area="" asp-controller="Account" asp-action="Register" class="lnk" id="registerLink">S'inscrire</a>
+        <a asp-area="" asp-controller="account" asp-action="register" class="lnk" id="registerLink">S'inscrire</a>
     </span>
     <span class="element">
-        <a asp-area="" asp-controller="Account" asp-action="Login" class="lnk" id="loginLink">Se connecter</a>
+        <a asp-area="" asp-controller="account" asp-action="login" class="lnk" id="loginLink">Se connecter</a>
     </span>
 }
