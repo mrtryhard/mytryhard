@@ -14,7 +14,7 @@
         }
     </p>
     <p class="content">
-        @Model.Content
+        @Html.Raw(CommonMark.CommonMarkConverter.Convert(Model.Content))
     </p>
 </article>
 

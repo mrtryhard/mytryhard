@@ -52,11 +52,12 @@
             "type": "platform"
         },
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-        "Npgsql": "3.1.5",
-        "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.0",
+        "Npgsql": "3.1.6",
         "Microsoft.EntityFrameworkCore.Relational": "1.0.0",
         "runtime.linux.System.Net.NetworkInformation": "4.1.0-beta-23516",
-        "runtime.unix.System.Net.Security": "4.0.0-beta-23516"
+        "runtime.unix.System.Net.Security": "4.0.0-beta-23516",
+        "CommonMark.NET": "0.13.4",
+        "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.1"
     },
 
     "commands": {
