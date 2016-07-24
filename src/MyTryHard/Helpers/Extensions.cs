@@ -184,5 +184,41 @@ namespace MyTryHard.Helpers
             parameter.Value = value;
             command.Parameters.Add(parameter);
         }
+
+        /// <summary>
+        /// Replace the first occurence of 'before' by 'after' in string.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="before"></param>
+        /// <param name="after"></param>
+        /// <returns>String with replaced tag.</returns>
+        public static string ReplaceOnce(this string obj, string before, string after)
+        {
+            if (obj == "") return obj;
+
+            int pos = obj.IndexOf(before);
+
+            if (pos < 0) return obj;
+
+            return obj.Substring(0, pos) + after + obj.Substring(pos + before.Length, obj.Length);
+        }
+
+        /// <summary>
+        /// Replace the last occurence of 'before' by 'after' in string.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="before"></param>
+        /// <param name="after"></param>
+        /// <returns></returns>
+        public static string ReplaceLastOnce(this string obj, string before, string after)
+        {
+            if (obj == "") return obj;
+
+            int pos = obj.LastIndexOf(obj);
+
+            if (pos < 0) return obj;
+
+            return obj.Substring(0, pos) + after + obj.Substring(pos + before.Length, obj.Length);
+        }
     }
 }
