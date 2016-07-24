@@ -505,9 +505,33 @@ article code {
     font-family: monospace, Consolas, 'Lucida Console', serif;
 }
 
+article pre code:before {
+    content: 'Code:';
+    font-weight: bold;
+    display: block;
+}
+
 article pre code {
     display: block;
-    width: 80%;
+    background-color: #FFFFFF;
+    width: 90%;
     border: 1px solid #bbb;
     margin: auto;
+    padding: 0.5rem;
+    background-image: linear-gradient(rgba(200,200,200, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(200,200,200,0.1) 1px, transparent 1px), linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,0,.2) 1px, transparent 1px);
+    background-size: 50px 50px, 50px 50px, 5px 5px, 5px 5px;
+    background-position: -5px -5px, -5px -5px, -1px -1px, -1px -1px;
 }
+
+article blockquote {
+    width: 90%;
+    display: block;
+    margin: auto;
+    padding: 0.3rem;
+    background-color: #f7f7f7;
+    border-left: 0.4rem solid #d7d7d7;
+}
+    article blockquote p {
+        margin: 0.5rem;
+        color: #555;
+    }
