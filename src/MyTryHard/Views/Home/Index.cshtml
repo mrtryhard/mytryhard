@@ -19,10 +19,10 @@
         <article>
             <h2>@article.Title</h2>
             <p class="information">
-                Publié dans <a href="@Url.Action("category")/@article.SEOUrl">@article.CategoryTitle</a> le @article.PublishedDate.ToString("d") par <a href="@Url.Action("users")/@article.AuthorName">@article.AuthorName</a><br />
+                Publié dans <a href="@Url.Action("category")/@article.CategorySEOUrl">@article.CategoryTitle</a> le @article.PublishedDate.ToString("dd-MM-yyyy") par <a href="@Url.Action("users")/@article.AuthorName">@article.AuthorName</a><br />
                 @if (article.LastEditDate.AreDiffrentBy(article.PublishedDate, new TimeSpan(0, 10, 0)))
                 {
-                    <small>Dernière édition le @article.LastEditDate.ToString("d")</small>
+                    <small>Dernière édition le @article.LastEditDate.ToString("dd-MM-yyyy")</small>
                 }
             </p>
             <p class="content">

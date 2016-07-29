@@ -8,9 +8,10 @@ RETURNS TABLE("AuthorId" VARCHAR(36),
 	      "CategoryTitle" VARCHAR(255),
 	      "PublishedDate" timestamp without time zone,
 	      "LastEditDate" timestamp without time zone,
-              "Title" VARCHAR(255),
-              "Content" TEXT,
-              "IsCommentAllowed" boolean) AS $$
+          "Title" VARCHAR(255),
+          "Content" TEXT,
+          "IsCommentAllowed" boolean,
+		  "CategorySEOUrl" VARCHAR(255)) AS $$
 BEGIN
 
   RETURN QUERY
@@ -23,7 +24,8 @@ BEGIN
            "ar"."LastEditionDate" AS "LastEditDate",
            "ar"."Title" AS "Title",
            "ar"."Content" AS "Content",
-           "ar"."IsCommentAllowed" AS "IsCommentAllowed"
+           "ar"."IsCommentAllowed" AS "IsCommentAllowed",
+		   "c"."SEOUrl" AS "CategorySEOUrl"
       FROM "dbo"."Articles" "ar"
         LEFT JOIN "dbo"."AspNetUsers" "u" ON "u"."Id" = "ar"."UserID"
         LEFT JOIN "dbo"."Categories" "c" ON "c"."CategoryID" = "ar"."CategoryID"

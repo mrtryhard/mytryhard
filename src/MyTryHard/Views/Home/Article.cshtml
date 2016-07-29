@@ -7,10 +7,10 @@
 <article>
     <h2>@Model.Title</h2>
     <p class="information">
-        Publié dans <a href="@Url.Action("category")/@Model.SEOUrl">@Model.CategoryTitle</a> le @Model.PublishedDate.ToString("d") par <a href="@Url.Action("user")/@Model.AuthorName">@Model.AuthorName</a><br />
+        Publié dans <a href="@Url.Action("category")/@Model.CategorySEOUrl">@Model.CategoryTitle</a> le @Model.PublishedDate.ToString("dd-MM-yyyy") par <a href="@Url.Action("user")/@Model.AuthorName">@Model.AuthorName</a><br />
         @if (Model.LastEditDate.AreDiffrentBy(Model.PublishedDate, new TimeSpan(0, 10, 0)))
         {
-            <small>Dernière édition le @Model.LastEditDate.ToString("d")</small>
+            <small>Dernière édition le @Model.LastEditDate.ToString("dd-MM-yyyy")</small>
         }
     </p>
     <p class="content">

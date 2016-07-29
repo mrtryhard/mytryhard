@@ -42,6 +42,9 @@ namespace MyTryHard.Models
         [Display(Name = "Url d'affichage")]
         public string SEOUrl { get; set; }
 
+        [Display(Name = "Url d'affichage de catégorie")]
+        public string CategorySEOUrl { get; set; }
+
         /// <summary>
         /// Disallow autofill, we'll do that ourselves.
         /// </summary>

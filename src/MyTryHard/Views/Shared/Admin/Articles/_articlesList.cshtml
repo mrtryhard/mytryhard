@@ -17,7 +17,7 @@ else
                 <em title="@article.Title">@article.Title.GetEllipsis(50, false)</em>&nbsp;&mdash;&nbsp;
                 @if (article.IsOnline)
                 {
-                    <text>publié le @article.PublishedDate.ToString("d")</text>
+                    <text>publié le @article.PublishedDate.ToString("dd-MM-yyyy")</text>
                 }
                 else
                 {
