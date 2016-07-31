@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Utilisateurs";
+}
+
+<section class="admin-side">
+    <h3>Options</h3>
+    <a data-panel="PanelCreateUser">Nouvel utilisateur</a>
+    <a data-panel="PanelListUsers">Tous les utilisateurs</a>
+    <h3>Recherche</h3>
+    <input name="query" id="searchquery" type="search" placeholder="Nom d'utilisateur ou courriel'" />
+    <input type="submit" id="btnSubmitSearch" value="Go" />
+</section>
+<section data-def-panel="PanelListUsers" class="admin-content" id="admin-container"></section>
