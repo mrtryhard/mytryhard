@@ -22,7 +22,7 @@ namespace MyTryHard.Bll
         /// <param name="startIndex">First article.</param>
         /// <param name="nbShow">Number of article to fetch.</param>
         /// <returns>Article list.</returns>
-        public List<Article> GetCategoryArticles(string catName, int startIndex, int nbShow)
+        public List<Article> GetCategoryArticles(string catUrl, int startIndex, int nbShow)
         {
             List<Article> lstArticles = new List<Article>();
 
@@ -32,7 +32,7 @@ namespace MyTryHard.Bll
                 cmd.CommandText = "dbo.pGetCategoryArticles";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                cmd.AddParameterWithValue("cattitle_in", catName);
+                cmd.AddParameterWithValue("caturl_in", catUrl);
                 cmd.AddParameterWithValue("nbstart_in", startIndex);
                 cmd.AddParameterWithValue("count_in", nbShow);
 

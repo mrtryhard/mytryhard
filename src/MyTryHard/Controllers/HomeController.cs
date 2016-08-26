@@ -88,7 +88,7 @@ namespace MyTryHard.Controllers
 
             avm.Articles = new List<Article>();
             avm.CurrentPage = page;
-            avm.Articles = _ctx.Articles.GetArticles(page * ARTICLES_PER_PAGE, ARTICLES_PER_PAGE);
+            avm.Articles = _ctx.Articles.GetCategoryArticles(category, page * ARTICLES_PER_PAGE, ARTICLES_PER_PAGE);
             avm.TotalPage = _ctx.Articles.GetCategoryArticlesCount(category) / ARTICLES_PER_PAGE;
 
             return View("Index", avm);

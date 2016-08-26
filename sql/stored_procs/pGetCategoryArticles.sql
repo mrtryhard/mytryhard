@@ -1,7 +1,7 @@
 drop function dbo.pGetCategoryArticles(varchar, integer, integer);
 
 CREATE OR REPLACE FUNCTION dbo.pGetCategoryArticles (
-  CatTitle_IN VARCHAR(255),
+  CatURL_IN VARCHAR(255),
   NbStart_IN INTEGER,
   Count_IN INTEGER
 )
@@ -35,8 +35,7 @@ BEGIN
       FROM "dbo"."Articles" "ar"
         LEFT JOIN "dbo"."AspNetUsers" "u" ON "u"."Id" = "ar"."UserID"
         LEFT JOIN "dbo"."Categories" "c" ON "c"."CategoryID" = "ar"."CategoryID" 
-		    AND "c"."Title" = CatTitle_IN
-      WHERE "ar"."IsOnline" = true
+      WHERE "ar"."IsOnline" = true AND "c"."SEOUrl" = CatURL_IN
       ORDER BY "ar"."PublishedDate" DESC
       LIMIT Count_IN OFFSET NbStart_IN;
 
