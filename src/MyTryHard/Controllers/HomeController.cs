@@ -59,16 +59,17 @@ namespace MyTryHard.Controllers
         /// <summary>
         /// Find article by name.
         /// </summary>
-        /// <param name="page"></param>
+        /// <param name="title"></param>
         /// <returns></returns>
+        [Route("home/article/{title}")]
         [ResponseCache(Duration = 5, NoStore = true)]
-        public IActionResult Article(string page)
+        public IActionResult Article(string title)
         {
             // Just check if it is okay.
-            if (string.IsNullOrWhiteSpace(page))
+            if (string.IsNullOrWhiteSpace(title))
                 return RedirectToAction("index");
 
-            Article article = _ctx.Articles.GetArticle(page);
+            Article article = _ctx.Articles.GetArticle(title);
 
             // If article has uninitialized Guid it means that it was unable to find the article.
             if (article.ArticleId == default(Guid))
