@@ -108,10 +108,11 @@ namespace MyTryHard
             {
                 routes.MapRoute(
                     name: "ErrorPage",
-                    template: "{controller=error}/{action=index}/{errorCode:int}");
+                    template: "error/{action=index}/{errorCode:int}",
+                    defaults: new { controller = "error" });
                 routes.MapRoute(
                     name: "ArticlesNavigation",
-                    template: "{controller=home}/{action=index}/{page}");
+                    template: "{controller=home}/{action=index}/{page:int?}");
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=home}/{action=index}/{id?}");

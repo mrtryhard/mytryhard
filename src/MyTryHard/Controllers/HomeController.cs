@@ -45,7 +45,7 @@ namespace MyTryHard.Controllers
         /// <param name="p">Page number</param>
         /// <returns></returns>
         [ResponseCache(Duration = 5, NoStore = true)]
-        public IActionResult Articles(int page = 0)
+        public IActionResult Articles(int page)
         {
             ArticlesViewModel avm = new ArticlesViewModel();
             avm.Articles = new List<Article>();
