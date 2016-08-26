@@ -27,7 +27,7 @@
         <div>
             <label asp-for="Category.ParentCategoryID"></label>
             <br />
-            @Html.DropDownListForCategories(Model.Categories, Model.Category != null ? Model.Category.ParentCategoryID : Guid.Empty)
+            @Html.DropDownListForCategories("Category_ParentCategoryID", Model.Categories, Model.Category != null ? Model.Category.ParentCategoryID : Guid.Empty)
         </div>
     }
     <div>

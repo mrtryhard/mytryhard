@@ -22,7 +22,7 @@
     <div>
         <label asp-for="Article.CategoryId"></label>
         <br />
-        @Html.DropDownListForCategories(Model.Categories, Model.Article != null ? Model.Article.CategoryId : Guid.Empty)
+        @Html.DropDownListForCategories("Article_CategoryId", "Article.CategoryId", Model.Categories, Model.Article != null ? Model.Article.CategoryId : Guid.Empty)
     </div>
     <div>
         <label asp-for="Article.Content"></label>

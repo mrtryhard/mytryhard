@@ -9,15 +9,17 @@ namespace MyTryHard.Helpers
 {
     public static class HtmlExtension
     {
-        public static IHtmlContent DropDownListForCategories(this HtmlHelper helper, List<Category> list)
+        public static IHtmlContent DropDownListForCategories(this HtmlHelper helper, string id, string name, List<Category> list)
         {
-            return DropDownListForCategories(helper, list, Guid.Empty);
+            return DropDownListForCategories(helper, id, name, list, Guid.Empty);
         }
 
-        public static IHtmlContent DropDownListForCategories(this IHtmlHelper helper, List<Category> list, Guid selected)
+        public static IHtmlContent DropDownListForCategories(this IHtmlHelper helper, string id, string name, List<Category> list, Guid selected)
         {        
             ViewDataDictionary vdd = new ViewDataDictionary(helper.ViewContext.ViewData);
             vdd.Add("Selected", selected);
+            vdd.Add("Id", id);
+            vdd.Add("Name", name);
 
             return helper.Partial("HtmlHelper/CategoriesList", list, vdd);
         }
