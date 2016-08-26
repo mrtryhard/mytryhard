@@ -10,6 +10,7 @@ namespace MyTryHard.Models
         private ArticlesContext _actx;
         private CategoriesContext _cctx;
         private AdminContext _admCtx;
+        private ProjectsContext _projCtx;
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -46,6 +47,17 @@ namespace MyTryHard.Models
                     _cctx = new CategoriesContext(Database.GetDbConnection().ConnectionString);
 
                 return _cctx;
+            }
+        }
+
+        public ProjectsContext Projects
+        {
+            get
+            {
+                if (_projCtx == null)
+                    _projCtx = new ProjectsContext(Database.GetDbConnection().ConnectionString);
+
+                return _projCtx;
             }
         }
 

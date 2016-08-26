@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "create_scripts", "create_sc
 		sql\create_scripts\table_articles.sql = sql\create_scripts\table_articles.sql
 		sql\create_scripts\table_categories.sql = sql\create_scripts\table_categories.sql
 		sql\create_scripts\table_comments.sql = sql\create_scripts\table_comments.sql
+		sql\create_scripts\table_tracked_sport.sql = sql\create_scripts\table_tracked_sport.sql
+		sql\create_scripts\table_tracker_entry.sql = sql\create_scripts\table_tracker_entry.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stored_procs", "stored_procs", "{06DD08F4-4645-401A-AC27-565BF928DEB4}"

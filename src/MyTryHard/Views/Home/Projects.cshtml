@@ -1,0 +1,16 @@
+﻿@model MyTryHard.ViewModels.ProjectsViewModel
+@{
+}
+
+<div id="projects">
+    @foreach (Project project in @Model.ProjectList)
+    {
+        <div class="project">
+            <a href="@project.Url"><strong>@project.Title</strong></a><br />
+            <em>@project.Description</em><br /><br />
+            <strong>Répertoire des sources: </strong><br />
+            <a href="@project.Repository">@project.Repository</a>
+        </div>
+    }
+
+</div>

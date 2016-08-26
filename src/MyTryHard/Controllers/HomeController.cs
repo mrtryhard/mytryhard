@@ -99,17 +99,19 @@ namespace MyTryHard.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        [ResponseCache(Duration = 5, NoStore = true)]
-        public IActionResult Planet()
+        [ResponseCache(Duration = 60)]
+        public IActionResult Projects()
         {
-            return RedirectToAction("index", "home");
+            ProjectsViewModel pvm = new ProjectsViewModel();
+            pvm.ProjectList = _ctx.Projects.GetProjectsList();
+            return View(pvm);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        [ResponseCache(Duration = 5, NoStore = true)]
+        [ResponseCache(Duration = 60)]
         public IActionResult About()
         {
             return View();
