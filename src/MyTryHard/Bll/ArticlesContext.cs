@@ -194,13 +194,15 @@ namespace MyTryHard.Bll
         /// </summary>
         /// <param name="catid">Category's id.</param>
         /// <returns></returns>
-        public int GetCategoryArticlesCount(string catid)
+        public int GetCategoryArticlesCount(string caturl)
         {
             using (var conn = OpenConnection())
             using (var cmd = conn.CreateCommand())
             {
-                cmd.CommandText = "SELECT COUNT(*) AS count FROM \"dbo\".\"Articles\" JOIN \"dbo\".\"Categories\" \"c\" ON \"c\".\"Title\" = @catid WHERE \"IsOnline\"=TRUE";
-                cmd.AddParameterWithValue("catid", catid);
+                cmd.CommandText = "SELECT COUNT(*) AS count FROM \"dbo\".\"Articles\" \"ar\" " +
+                    "JOIN \"dbo\".\"Categories\" \"c\" ON \"c\".\"CategoryID\" = \"ar\".\"CategoryID\" " +
+                    "WHERE \"IsOnline\"=TRUE AND \"c\".\"SEOUrl\" = @caturl";
+                cmd.AddParameterWithValue("caturl", caturl);
 
                 var dr = cmd.ExecuteReader();
 
