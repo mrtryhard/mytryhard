@@ -90,7 +90,7 @@ namespace MyTryHard.Helpers
             if (start < 0 || start >= original.Length)
                 throw new ArgumentOutOfRangeException("start", "Parameter must be >= 0 or <= string length");
 
-            if (end < 0 || end >= original.Length)
+            if (end < 0 || end > original.Length)
                 throw new ArgumentOutOfRangeException("end", "Parameter must be >= 0 or <= string length");
 
             if (end <= start)
