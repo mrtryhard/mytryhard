@@ -16,6 +16,44 @@ namespace MyTryHard.Bll
         }
 
         /// <summary>
+        /// Gets the articles for the given category.
+        /// </summary>
+        /// <param name="catName">Category's name</param>
+        /// <param name="startIndex">First article.</param>
+        /// <param name="nbShow">Number of article to fetch.</param>
+        /// <returns>Article list.</returns>
+        public List<Article> GetCategoryArticles(string catName, int startIndex, int nbShow)
+        {
+            List<Article> lstArticles = new List<Article>();
+
+            using (var conn = OpenConnection())
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "dbo.pGetCategoryArticles";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.AddParameterWithValue("cattitle_in", catName);
+                cmd.AddParameterWithValue("nbstart_in", startIndex);
+                cmd.AddParameterWithValue("count_in", nbShow);
+
+                var dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    Article article = new Article();
+                    DatabaseHelper.FillModelFromReader(article, dr);
+                    article.ShortContent = article.Content.GetEllipsis(
+                        Math.Min(article.Content.Length - 1, 500),
+                        false);
+
+                    lstArticles.Add(article);
+                }
+            }
+
+            return lstArticles;
+        }
+
+        /// <summary>
         /// Gets articles
         /// </summary>
         /// <param name="startIndex">First article</param>
@@ -140,6 +178,29 @@ namespace MyTryHard.Bll
             using (var cmd = conn.CreateCommand())
             {
                 cmd.CommandText = "SELECT COUNT(*) AS count FROM \"dbo\".\"Articles\" WHERE \"IsOnline\"=TRUE";
+
+                var dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                    return Convert.ToInt32(dr[0]);
+                else
+                    return 0;
+            }
+        }
+
+        // TODO: FIX
+        /// <summary>
+        /// Gets the articles count for a given category.
+        /// </summary>
+        /// <param name="catid">Category's id.</param>
+        /// <returns></returns>
+        public int GetCategoryArticlesCount(string catid)
+        {
+            using (var conn = OpenConnection())
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "SELECT COUNT(*) AS count FROM \"dbo\".\"Articles\" JOIN \"dbo\".\"Categories\" \"c\" ON \"c\".\"Title\" = @catid WHERE \"IsOnline\"=TRUE";
+                cmd.AddParameterWithValue("catid", catid);
 
                 var dr = cmd.ExecuteReader();
 

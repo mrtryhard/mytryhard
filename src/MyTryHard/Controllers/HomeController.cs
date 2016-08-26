@@ -77,6 +77,23 @@ namespace MyTryHard.Controllers
             return View(article);
         }
 
+        [Route("home/category/{category}/{page?}")]
+        [ResponseCache(Duration = 10, NoStore = true)]
+        public IActionResult Category(string category, int page = 0)
+        {
+            if (string.IsNullOrWhiteSpace(category))
+                return RedirectToAction("index");
+
+            ArticlesViewModel avm = new ArticlesViewModel();
+
+            avm.Articles = new List<Article>();
+            avm.CurrentPage = page;
+            avm.Articles = _ctx.Articles.GetArticles(page * ARTICLES_PER_PAGE, ARTICLES_PER_PAGE);
+            avm.TotalPage = _ctx.Articles.GetCategoryArticlesCount(category) / ARTICLES_PER_PAGE;
+
+            return View("Index", avm);
+        }
+
         /// <summary>
         /// 
         /// </summary>
