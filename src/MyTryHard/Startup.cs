@@ -114,6 +114,10 @@ namespace MyTryHard
                     name: "ArticlesNavigation",
                     template: "{controller=home}/{action=index}/{page:int?}");
                 routes.MapRoute(
+                    name: "IndexPagination",
+                    template: "{page:int}",
+                    defaults: new { controller = "home", action = "index" });
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=home}/{action=index}/{id?}");
             });
