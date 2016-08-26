@@ -44,7 +44,7 @@ namespace MyTryHard.Bll.Admin
                     //NpgsqlTypes.NpgsqlDbType.Array | NpgsqlTypes.NpgsqlDbType.Varchar,
                     strIds);
 
-                cmd.ExecuteNonQueryAsync();
+                cmd.ExecuteNonQuery();
             }
         }
 
