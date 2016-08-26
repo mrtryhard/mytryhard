@@ -3,14 +3,18 @@
 }
 
 <div id="projects">
+    <h1>Projets</h1>
+    <p>Cette page regroupe les projets auxquels je participe, que j'en sois l'auteur ou non.</p>
     @foreach (Project project in @Model.ProjectList)
     {
+        <hr />
         <div class="project">
             <a href="@project.Url"><strong>@project.Title</strong></a><br />
             <em>@project.Description</em><br /><br />
             <strong>Répertoire des sources: </strong><br />
             <a href="@project.Repository">@project.Repository</a>
         </div>
+        
     }
 
 </div>
