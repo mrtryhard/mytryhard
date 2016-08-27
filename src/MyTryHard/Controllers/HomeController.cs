@@ -117,6 +117,7 @@ namespace MyTryHard.Controllers
             return View();
         }
 
+        [ResponseCache(Duration = 10, NoStore = true)]
         public IActionResult Error()
         {
             return View();
