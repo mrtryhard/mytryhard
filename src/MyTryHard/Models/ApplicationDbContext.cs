@@ -11,6 +11,7 @@ namespace MyTryHard.Models
         private CategoriesContext _cctx;
         private AdminContext _admCtx;
         private ProjectsContext _projCtx;
+        private TrackerContext _trackCtx;
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -58,6 +59,17 @@ namespace MyTryHard.Models
                     _projCtx = new ProjectsContext(Database.GetDbConnection().ConnectionString);
 
                 return _projCtx;
+            }
+        }
+
+        public TrackerContext Tracker
+        {
+            get
+            {
+                if (_trackCtx == null)
+                    _trackCtx = new TrackerContext(Database.GetDbConnection().ConnectionString);
+
+                return _trackCtx;
             }
         }
 

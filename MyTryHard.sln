@@ -46,6 +46,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stored_procs", "stored_proc
 		sql\stored_procs\pGetGeneralStats.sql = sql\stored_procs\pGetGeneralStats.sql
 		sql\stored_procs\pGetPublicArticle.sql = sql\stored_procs\pGetPublicArticle.sql
 		sql\stored_procs\pGetPublicArticles.sql = sql\stored_procs\pGetPublicArticles.sql
+		sql\stored_procs\pGetTrackerEntriesForUser.sql = sql\stored_procs\pGetTrackerEntriesForUser.sql
+		sql\stored_procs\pSaveTrackerEntryForUser.sql = sql\stored_procs\pSaveTrackerEntryForUser.sql
 		sql\stored_procs\pSetPassword.sql = sql\stored_procs\pSetPassword.sql
 	EndProjectSection
 EndProject

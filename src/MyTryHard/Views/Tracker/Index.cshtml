@@ -1,1 +1,37 @@
-﻿
+﻿@model MyTryHard.ViewModels.Tracker.TrackerViewModel
+@using MyTryHard.Models.Tracker
+
+<div id="tracker">
+    <h1>Fitness Tracker</h1>
+    <p>
+        Le Fitness Tracker permet d'enregistrer vos performance et
+        de générer les statistiques par rapport à ceux-ci.
+    </p>
+    <div>
+        <a asp-action="add" title="Ajouter un temps">Ajouter un suivi</a>
+        <form asp-controller="" asp-action="entries" method="get" role="form" style="float:right;">
+            <select name="sportId" id="sportId">
+                @foreach (KeyValuePair<int, string> kvp in Model.SportsList)
+                {
+                    <option value="@kvp.Key">@kvp.Value</option>
+                }
+            </select>
+            <input type="submit" value="Filter!" />
+        </form>
+        <div style="clear:both;"></div>
+    </div>
+    @if (Model.Entries.Count == 0)
+    {
+        <p class="message">
+            Aucun suivi entré!
+        </p>
+    }
+
+    @foreach (TrackerEntry entry in Model.Entries)
+    {
+        <em>@entry.Distance</em>
+
+        <hr />
+    }
+
+</div>

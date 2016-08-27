@@ -1,10 +1,7 @@
 ﻿using MyTryHard.Helpers;
-using MyTryHard.Models;
 using MyTryHard.Models.Tracker;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyTryHard.Bll
 {
@@ -12,6 +9,27 @@ namespace MyTryHard.Bll
     {
         public TrackerContext(string connStr) : base(connStr)
         {
+        }
+
+        public Dictionary<int, string> GetSportsList()
+        {
+            Dictionary<int, string> sports = new Dictionary<int, string>();
+
+            using (var conn = OpenConnection())
+            using (var cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = "SELECT * FROM \"dbo\".\"TrackedSports\" ORDER BY \"Title\"";
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                var dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    sports.Add((int)dr["TrackedSportID"], dr["Title"] as string);
+                }
+            }
+
+            return sports;
         }
 
         public List<TrackerEntry> GetEntriesForUser(Guid userId)
@@ -25,7 +43,7 @@ namespace MyTryHard.Bll
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 cmd.AddParameterWithValue("userid_in", userId.ToString());
-                cmd.AddParameterWithValue("sportid_in", null);
+                cmd.AddParameterWithValue("sportid_in", -1);
 
                 var dr = cmd.ExecuteReader();
 
@@ -76,8 +94,8 @@ namespace MyTryHard.Bll
 
                 cmd.AddParameterWithValue("userid_in", userId.ToString());
                 cmd.AddParameterWithValue("distance_in", te.Distance);
-                cmd.AddParameterWithValue("start_in", te.DateTimeStart);
-                cmd.AddParameterWithValue("end_in", te.DateTimeEnd);
+                cmd.AddParameterWithValue("datetimestart_in", te.DateTimeStart);
+                cmd.AddParameterWithValue("datetimeend_in", te.DateTimeEnd);
                 cmd.AddParameterWithValue("sportid_in", te.SportId);
 
                 cmd.ExecuteNonQuery();
