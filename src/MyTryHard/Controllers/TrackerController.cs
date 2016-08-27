@@ -68,13 +68,19 @@ namespace MyTryHard.Controllers
         public IActionResult Entries(int sportId = -1)
         {
             if (sportId == -1)
-                return RedirectToAction("Index");
+                return RedirectToAction("index");
 
             TrackerViewModel tvm = new TrackerViewModel();
             var userId = _userManager.GetUserId(HttpContext.User);
             tvm.Entries = _ctx.Tracker.GetEntriesForUserAndSport(Guid.Parse(userId), sportId);
             tvm.SportsList = _ctx.Tracker.GetSportsList();
+            ViewBag.SportId = sportId;
             return View("Index", tvm);
+        }
+
+        public IActionResult EntriesRedirect(int sportId)
+        {
+            return RedirectToAction("entries", new { sportId = sportId });
         }
 
         public IActionResult GetGraph()
