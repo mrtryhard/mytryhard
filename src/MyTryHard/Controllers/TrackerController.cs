@@ -5,6 +5,8 @@ using MyTryHard.Models;
 using MyTryHard.Models.Tracker;
 using MyTryHard.ViewModels.Tracker;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MyTryHard.Controllers
 {
@@ -13,6 +15,7 @@ namespace MyTryHard.Controllers
     {
         private ApplicationDbContext _ctx;
         private readonly UserManager<ApplicationUser> _userManager;
+        private static Random _ran = new Random();
 
         public TrackerController(
             UserManager<ApplicationUser> userManager,
@@ -85,7 +88,28 @@ namespace MyTryHard.Controllers
 
         public IActionResult GetGraph()
         {
-            return RedirectToAction("Index");
+            TrackerViewModel tvm = new TrackerViewModel();
+            var userId = _userManager.GetUserId(HttpContext.User);
+            tvm.Entries = _ctx.Tracker.GetEntriesForUser(Guid.Parse(userId));
+            tvm.SportsList = _ctx.Tracker.GetSportsList();
+
+            PieChart pie = new PieChart();
+
+            foreach(KeyValuePair<int, string> kvp in tvm.SportsList)
+            {
+                double value = tvm.Entries.Where(x => x.SportId == kvp.Key).Count();
+                if (value == 0)
+                    continue;
+
+                PieChart.PieChartSlice slice = new PieChart.PieChartSlice();
+                slice.Value = value;
+                slice.DisplayValue = value.ToString();
+                slice.Label = kvp.Value;
+                slice.Color = PieChart.GetColor(kvp.Key);
+                pie.Slices.Add(slice);
+            }
+
+            return PartialView("SportsDistributionGraph", pie);
         }
     }
 }

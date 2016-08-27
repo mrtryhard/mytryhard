@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -219,6 +220,11 @@ namespace MyTryHard.Helpers
             if (pos < 0) return obj;
 
             return obj.Substring(0, pos) + after + obj.Substring(pos + before.Length, obj.Length);
+        }
+
+        public static string NumString(this double number)
+        {
+            return number.ToString(new CultureInfo("en-US"));
         }
     }
 }
