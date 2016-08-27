@@ -84,7 +84,7 @@ namespace MyTryHard.Bll
             return lstEntries;
         }
 
-        public void SaveEntryForUser(Guid userId, TrackerEntry te)
+        public void SaveEntryForUser(Guid userId, DateTime dtStart, DateTime dtEnd, int distance, int sportId)
         {
             using (var conn = OpenConnection())
             using (var cmd = conn.CreateCommand())
@@ -93,10 +93,10 @@ namespace MyTryHard.Bll
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 cmd.AddParameterWithValue("userid_in", userId.ToString());
-                cmd.AddParameterWithValue("distance_in", te.Distance);
-                cmd.AddParameterWithValue("datetimestart_in", te.DateTimeStart);
-                cmd.AddParameterWithValue("datetimeend_in", te.DateTimeEnd);
-                cmd.AddParameterWithValue("sportid_in", te.SportId);
+                cmd.AddParameterWithValue("distance_in", distance);
+                cmd.AddParameterWithValue("datetimestart_in", dtStart);
+                cmd.AddParameterWithValue("datetimeend_in", dtEnd);
+                cmd.AddParameterWithValue("sportid_in", sportId);
 
                 cmd.ExecuteNonQuery();
             }

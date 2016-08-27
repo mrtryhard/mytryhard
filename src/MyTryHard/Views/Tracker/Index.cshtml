@@ -26,12 +26,32 @@
             Aucun suivi entré!
         </p>
     }
-
-    @foreach (TrackerEntry entry in Model.Entries)
+    else
     {
-        <em>@entry.Distance</em>
+        <table class="tracker-summary">
+            <tr>
+                <th>Sport</th>
+                <th>Date</th>
+                <th>Temps</th>
+                <th>Distance</th>
+            </tr>
+            <tr class="explanation">
+                <td></td>
+                <td><em>(aa-mm-jj)</em></td>
+                <td><em>(hh:mm:ss:uu)</em></td>
+                <td><em>mètres</em></td>
+            </tr>
 
-        <hr />
+            @foreach (TrackerEntry entry in Model.Entries)
+            {
+                <tr class="entry">
+                    <td>@entry.SportName</td>
+                    <td>@entry.DateTimeStart.Date.ToString("yyyy-MM-dd")</td>
+                    <td>@entry.DateTimeEnd.Subtract(entry.DateTimeStart).ToString("h\\h\\ mm\\m\\ ss\\.fff\\s")</td>
+                    <td>@entry.Distance </td>
+                </tr>
+            }
+        </table>
     }
 
 </div>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyTryHard.Models;
+using MyTryHard.Models.Tracker;
 using MyTryHard.ViewModels.Tracker;
 using System;
 
@@ -31,13 +32,35 @@ namespace MyTryHard.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveEntry()
+        public IActionResult Save()
         {
-            return View();
+            DateTime dtStart = new DateTime(int.Parse(Request.Form["startYear"]), 
+                int.Parse(Request.Form["startMonth"]),
+                int.Parse(Request.Form["startDay"]), 
+                int.Parse(Request.Form["startHour"]), 
+                int.Parse(Request.Form["startMinute"]), 
+                int.Parse(Request.Form["startSecond"]),
+                int.Parse(Request.Form["startMillis"]));
+
+            DateTime dtEnd = new DateTime(int.Parse(Request.Form["endYear"]),
+                int.Parse(Request.Form["endMonth"]),
+                int.Parse(Request.Form["endDay"]),
+                int.Parse(Request.Form["endHour"]),
+                int.Parse(Request.Form["endMinute"]),
+                int.Parse(Request.Form["endSecond"]),
+                int.Parse(Request.Form["endMillis"]));
+            int distance = int.Parse(Request.Form["distance"]);
+            int sportId = int.Parse(Request.Form["SportId"]);
+            var userId = _userManager.GetUserId(HttpContext.User);
+
+            _ctx.Tracker.SaveEntryForUser(Guid.Parse(userId), dtStart, dtEnd, distance, sportId);
+
+            return RedirectToAction("index");
         }
 
         public IActionResult Add()
         {
+            ViewBag.SportsList = _ctx.Tracker.GetSportsList();
             return View();
         }
 

@@ -7,7 +7,7 @@ CREATE OR REPLACE FUNCTION dbo.pSaveTrackerEntryForUser (
 )
 RETURNS VOID AS $$
 BEGIN
-  INSERT INTO "dbo"."TrackerEntry" ("TrackerSportID", "UserID", "Distance", "DateTimeStart", "DateTimeEnd")
+  INSERT INTO "dbo"."TrackerEntry" ("TrackedSportID", "UserID", "Distance", "DateTimeStart", "DateTimeEnd")
     VALUES (SportID_IN, UserID_IN, Distance_IN, DateTimeStart_IN, DateTimeEnd_IN);
 END;
 $$ LANGUAGE plpgsql;

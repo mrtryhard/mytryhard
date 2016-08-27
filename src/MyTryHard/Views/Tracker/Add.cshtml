@@ -1,0 +1,41 @@
+﻿@using MyTryHard.ViewModels.Tracker
+
+<div id="tracker">
+    <form action="save" id="new_entry" method="post" role="form">
+        <label for="SportId">Sport:</label>
+        <br />
+        <select name="SportId" id="SportId">
+            @foreach (KeyValuePair<int, string> kvp in ViewBag.SportsList)
+            {
+                <option value="@kvp.Key">@kvp.Value</option>
+            }
+        </select><br />
+
+        <label for="Distance">Distance (mètres):</label>
+        <br />
+        <input type="text" name="distance" pattern="\d+" required="required" />
+        <br />
+        <label>Date du début:</label>
+        <br />
+        <input type="text" required="required" placeholder="Année" name="startYear" pattern="\d+" />
+        <input type="text" required="required" placeholder="Mois" name="startMonth" pattern="\d+" />
+        <input type="text" required="required" placeholder="Jour" name="startDay" pattern="\d+" />
+        <input type="text" required="required" placeholder="Heures" name="startHour" pattern="\d+" />
+        <input type="text" required="required" placeholder="Minutes" name="startMinute" pattern="\d+" />
+        <input type="text" required="required" placeholder="Secondes" name="startSecond" pattern="\d+" />
+        <input type="text" required="required" placeholder="Millisecondes" name="startMillis" pattern="\d+" />
+        <br />
+        <label>Date de fin:</label>
+        <br />
+        <input type="text" required="required" placeholder="Année" name="endYear" pattern="\d+" />
+        <input type="text" required="required" placeholder="Mois" name="endMonth" pattern="\d+" />
+        <input type="text" required="required" placeholder="Jour" name="endDay" pattern="\d+" />
+        <input type="text" required="required" placeholder="Heures" name="endHour" pattern="\d+" />
+        <input type="text" required="required" placeholder="Minutes" name="endMinute" pattern="\d+" />
+        <input type="text" required="required" placeholder="Secondes" name="endSecond" pattern="\d+" />
+        <input type="text" required="required" placeholder="Millisecondes" name="endMillis" pattern="\d+" />
+        <br />
+        <br />
+        <input type="submit" value="Ajouter!" />
+    </form>
+</div>

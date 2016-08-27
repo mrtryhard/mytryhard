@@ -558,3 +558,47 @@ article blockquote p {
     margin: 0.2rem;
     color: #555;
 }
+
+#tracker #new_entry input[type="text"] {
+    width: 40px;
+}
+
+table.tracker-summary {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table.tracker-summary tr td {
+    border-right: 1px solid #ccc;
+    padding: 2px 2px 2px 5px;
+}
+table.tracker-summary tr:nth-child(2) td {
+    border-bottom: 1px solid #999;
+}
+
+table.tracker-summary tr td:last-child,
+table.tracker-summary tr th:last-child {
+    border-right: 1px solid black;
+}
+
+table.tracker-summary th {
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: #eee;
+}
+
+table.tracker-summary tr.entry td {
+    border-bottom: 1px solid #ccc;
+}
+
+table.tracker-summary td:first-child {
+    border-left: 1px solid black;
+}
+
+tr.explanation {
+    font-size: 0.8rem;
+    text-align: center;
+}
