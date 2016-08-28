@@ -20,6 +20,16 @@
 
         }
     </div>
+    <div class="tracker-global-stats">
+        @{ 
+            TimeSpan tsTotalTime = new TimeSpan(Model.Entries.Sum(x => (x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks)));
+        }
+        <strong>Temps suivi:</strong> @tsTotalTime.Days jours @tsTotalTime.Hours heures @tsTotalTime.Minutes minutes @tsTotalTime.Seconds secondes et @tsTotalTime.Milliseconds ms
+        <br />
+        <strong>Distance accomplie:</strong> @Model.Entries.Sum(x => x.Distance).ToString("### ### ####") mètres
+        <br />
+        <strong></strong>
+    </div>
     <div>
         <a asp-action="add" title="Ajouter un temps">Ajouter un suivi</a>
         <form asp-controller="tracker" asp-action="entriesredirect" method="get" role="form" style="float:right;">
