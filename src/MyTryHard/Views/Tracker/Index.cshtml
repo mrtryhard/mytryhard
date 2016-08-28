@@ -24,14 +24,22 @@
         @{
             TimeSpan tsTotalTime = new TimeSpan(Model.Entries.Sum(x => (x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks)));
         }
-        <strong>Temps suivi:</strong> @tsTotalTime.Days jours @tsTotalTime.Hours heures @tsTotalTime.Minutes minutes @tsTotalTime.Seconds secondes et @tsTotalTime.Milliseconds ms
+        <strong>Temps total suivi:</strong> @tsTotalTime.TotalDays.ToString("0") jours @tsTotalTime.Hours heures @tsTotalTime.Minutes minutes @tsTotalTime.Seconds secondes et @tsTotalTime.Milliseconds ms
         <br />
-        <strong>Distance accomplie:</strong> @Model.Entries.Sum(x => x.Distance).ToString("### ### ####") mètres
+        <strong>Distance totale accomplie:</strong> @Model.Entries.Sum(x => x.Distance).ToString("### ### ####") mètres
         <br />
         @if (ViewBag.SportId != null)
         {
             TimeSpan tsTimePerMeter = new TimeSpan(Model.Entries.Sum(x => (x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks)) / Model.Entries.Sum(x => x.Distance));
+            TimeSpan tsAverageTime = new TimeSpan(Model.Entries.Sum(x => x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks) / Model.Entries.Count);
+            TimeSpan tsMedianTime = new TimeSpan(Model.Entries.Select(x => x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks).ElementAt(Model.Entries.Count / 2));
             <text><strong>Temps moyen par mètre:</strong> @tsTimePerMeter.Seconds secondes @tsTimePerMeter.Milliseconds ms</text>
+            <br />
+            <text><strong>Temps moyen total:</strong> @tsAverageTime.Hours heures @tsAverageTime.Minutes minutes @tsAverageTime.Seconds secondes @tsAverageTime.Milliseconds ms</text>
+            <br />
+            <text><strong>Temps médian:</strong> @tsMedianTime.Hours heures @tsMedianTime.Minutes minutes @tsMedianTime.Seconds secondes @tsMedianTime.Milliseconds ms</text>
+
+
         }
     </div>
     <div>
