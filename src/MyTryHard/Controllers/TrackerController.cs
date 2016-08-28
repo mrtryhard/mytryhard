@@ -34,7 +34,7 @@ namespace MyTryHard.Controllers
             tvm.SportsList = _ctx.Tracker.GetSportsList();
             ViewBag.PieData = new ChartData();
             GeneratePieItemsFromTracker(tvm, ViewBag.PieData);
-            ViewBag.PieData.Title = "Proportions d'entrées des sports";
+            ViewBag.PieData.Title = "Proportions de suivi des sports";
             return View(tvm);
         }
 
