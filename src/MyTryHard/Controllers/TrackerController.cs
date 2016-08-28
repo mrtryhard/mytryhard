@@ -93,7 +93,7 @@ namespace MyTryHard.Controllers
             return RedirectToAction("entries", new { sportId = sportId });
         }
 
-        public IActionResult GetGraph()
+        public IActionResult GetSportDistributionGraph()
         {
             TrackerViewModel tvm = new TrackerViewModel();
             var userId = _userManager.GetUserId(HttpContext.User);

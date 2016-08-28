@@ -602,3 +602,11 @@ tr.explanation {
     font-size: 0.8rem;
     text-align: center;
 }
+
+#tracker .sport-graph {
+    margin: auto; 
+    padding: 0 0 0 5px; 
+    height: 250px; 
+    width: 350px; 
+    border: 1px solid #777;
+}

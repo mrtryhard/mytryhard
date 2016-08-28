@@ -8,8 +8,17 @@
         Le Fitness Tracker permet d'enregistrer vos performance et
         de générer les statistiques par rapport à ceux-ci.
     </p>
-    <div>
-        @Html.PieChartFor(ViewBag.PieData as ChartData, "sportDistributionGraph", 350, 250)
+    <div class="sport-graph">
+        @if (ViewBag.SportId == null)
+        {
+            // Show Pie Chart of sports distribution.
+            @Html.PieChartFor(ViewBag.PieData as ChartData, "sportDistributionGraph", 350, 250)
+        }
+        else
+        {
+            // Show performance shart. 
+
+        }
     </div>
     <div>
         <a asp-action="add" title="Ajouter un temps">Ajouter un suivi</a>
