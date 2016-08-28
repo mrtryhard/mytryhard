@@ -1,30 +1,38 @@
-﻿@model MyTryHard.Models.Tracker.PieChart
-@using MyTryHard.Models.Tracker
+﻿@model MyTryHard.Models.Chart.ChartData
+@using MyTryHard.Models.Chart
 @using MyTryHard.Helpers
 
-<svg height="510" width="700">
+<svg id="@ViewData["id"]"
+     height="@(ViewData["height"] ?? 510)"
+     width="@(ViewData["width"] ?? 800)"
+     viewBox="0, 0, 800, 510"
+     preserveAspectRatio="xMinYMin meet">
     <style type="text/css">
         .slice:hover {
             filter: brightness(120%) drop-shadow(0.4em 0.4em 2px rgba(0,0,0,0.5));
+            stroke: #00B2EE;
+            stroke-width: 2;
         }
 
         g text {
             font-family: "Open Sans", Tahoma, serif;
-            font-size: 0.8rem;
+            font-size: 1.4rem;
         }
     </style>
     @{
-        // Calculate how much angle is a slice.
-        double totalValues = Model.Slices.Sum(x => x.Value);
-        double anglePerValue = 360.0d / totalValues;
         int lastTextHeight = 20;
-        int textAlign = 550;
+        const int lastTextOffset = 40;
+        const int textAlign = 550;
+        const double radius = 250;
+        const double radOffset = 251;
 
-        double radius = 250;
-        double radOffset = 251;
+        // Calculate how much angle is a slice.
+        double totalValues = Model.Items.Sum(x => x.Value);
+        double anglePerValue = 360.0d / totalValues;
+
         double startAngle = 0;
         double endAngle = 0;
-        foreach (PieChart.PieChartSlice slice in Model.Slices)
+        foreach (ChartItem slice in Model.Items)
         {
             // Calculate angle of the slice.
             startAngle = endAngle;
@@ -45,12 +53,16 @@
             var d = "M250,250  L" + x1.NumString() + "," + y1.NumString() + "  A250,250 0 " + bigArc + ",1 " + x2.NumString() + "," + y2.NumString() + " Z L" + x2.NumString() + "," + y2.NumString() + "";
             <g>
                 <title>@slice.Label (@slice.Value)</title>
-                <text x="@(textAlign - 10)" y="@(lastTextHeight - 1)" fill="@slice.Color">■</text> 
-                <text x="@textAlign" y="@lastTextHeight">@((slice.Value / totalValues).ToString("0.00 %")) - @slice.Label (@slice.Value) </text>
-                <path class="slice" d="@d.ToString()" stroke-linejoin="miter" stroke="black" stroke-width="1" fill="@slice.Color" />
+                <text x="@(textAlign - 20)"
+                      y="@(lastTextHeight - 2)"
+                      fill="@slice.Color.HexCode()">■</text>
+                <text x="@textAlign" y="@lastTextHeight">
+                    @((slice.Value / totalValues).ToString("0.00 %")) - @slice.Label (@slice.Value)
+                </text>
+                <path class="slice" d="@d.ToString()" stroke-linejoin="miter" stroke="black" stroke-width="1" fill="@slice.Color.HexCode()" />
             </g>
 
-            lastTextHeight += 30;
+            lastTextHeight += lastTextOffset;
         }
     }
 </svg>

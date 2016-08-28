@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyTryHard.Models;
+using MyTryHard.Models.Chart;
 using MyTryHard.Models.Tracker;
 using MyTryHard.ViewModels.Tracker;
 using System;
@@ -93,7 +94,7 @@ namespace MyTryHard.Controllers
             tvm.Entries = _ctx.Tracker.GetEntriesForUser(Guid.Parse(userId));
             tvm.SportsList = _ctx.Tracker.GetSportsList();
 
-            PieChart pie = new PieChart();
+            ChartData pie = new ChartData();
 
             foreach(KeyValuePair<int, string> kvp in tvm.SportsList)
             {
@@ -101,15 +102,16 @@ namespace MyTryHard.Controllers
                 if (value == 0)
                     continue;
 
-                PieChart.PieChartSlice slice = new PieChart.PieChartSlice();
+                ChartItem slice = new ChartItem();
                 slice.Value = value;
                 slice.DisplayValue = value.ToString();
                 slice.Label = kvp.Value;
-                slice.Color = PieChart.GetColor(kvp.Key);
-                pie.Slices.Add(slice);
+                slice.Color = ChartItem.GetColorFromId(kvp.Key);
+                pie.Items.Add(slice);
             }
 
-            return PartialView("SportsDistributionGraph", pie);
+            return PartialView("Chart/PieChart", pie);
+            //return PartialView("SportsDistributionGraph", pie);
         }
     }
 }
