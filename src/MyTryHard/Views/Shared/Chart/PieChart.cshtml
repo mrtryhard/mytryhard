@@ -31,7 +31,7 @@
     @{
         int lastTextHeight = 20;
         const int lastTextOffset = 40;
-        const int textAlign = 550;
+        const int textAlign = 555;
         const double radius = 250;
         const double radOffset = 255;
         int heightOffset = 0;
@@ -76,9 +76,12 @@
             var d = "M" + radOffset + "," + (250 + heightOffset) + "  L" + x1.NumString() + "," + y1.NumString() + "  A250,250 0 " + bigArc + ",1 " + x2.NumString() + "," + y2.NumString() + " Z L" + x2.NumString() + "," + y2.NumString() + "";
             <g>
                 <title>@slice.Label (@slice.Value)</title>
-                <text x="@(textAlign - 20)"
-                      y="@(lastTextHeight - 2)"
-                      fill="@slice.Color.HexCode()">■</text>
+                <text x="@(textAlign - 25)"
+                      y="@(lastTextHeight - 1)"
+                      fill="@slice.Color.HexCode()"
+                      stroke="black"
+                      style="font-size: 2rem;"
+                      stroke-width="2">■</text>
                 <text x="@textAlign" y="@lastTextHeight">
                     @((slice.Value / totalValues).ToString("0.00 %")) - @slice.Label (@slice.Value)
                 </text>
