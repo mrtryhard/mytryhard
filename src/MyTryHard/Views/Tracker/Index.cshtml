@@ -16,19 +16,23 @@
         }
         else
         {
-            // Show performance shart. 
+            // Show performance chart.
 
         }
     </div>
     <div class="tracker-global-stats">
-        @{ 
+        @{
             TimeSpan tsTotalTime = new TimeSpan(Model.Entries.Sum(x => (x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks)));
         }
         <strong>Temps suivi:</strong> @tsTotalTime.Days jours @tsTotalTime.Hours heures @tsTotalTime.Minutes minutes @tsTotalTime.Seconds secondes et @tsTotalTime.Milliseconds ms
         <br />
         <strong>Distance accomplie:</strong> @Model.Entries.Sum(x => x.Distance).ToString("### ### ####") mètres
         <br />
-        <strong></strong>
+        @if (ViewBag.SportId != null)
+        {
+            TimeSpan tsTimePerMeter = new TimeSpan(Model.Entries.Sum(x => (x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks)) / Model.Entries.Sum(x => x.Distance));
+            <text><strong>Temps moyen par mètre:</strong> @tsTimePerMeter.Seconds secondes @tsTimePerMeter.Milliseconds ms</text>
+        }
     </div>
     <div>
         <a asp-action="add" title="Ajouter un temps">Ajouter un suivi</a>
