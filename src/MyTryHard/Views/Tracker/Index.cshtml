@@ -1,5 +1,6 @@
 ﻿@model MyTryHard.ViewModels.Tracker.TrackerViewModel
 @using MyTryHard.Models.Tracker
+@using MyTryHard.Models.Chart
 
 <div id="tracker">
     <h1>Fitness Tracker</h1>
@@ -7,6 +8,9 @@
         Le Fitness Tracker permet d'enregistrer vos performance et
         de générer les statistiques par rapport à ceux-ci.
     </p>
+    <div>
+        @Html.PieChartFor(ViewBag.PieData as ChartData, "sportDistributionGraph", 350, 250)
+    </div>
     <div>
         <a asp-action="add" title="Ajouter un temps">Ajouter un suivi</a>
         <form asp-controller="tracker" asp-action="entriesredirect" method="get" role="form" style="float:right;">

@@ -32,6 +32,9 @@ namespace MyTryHard.Controllers
             var userId = _userManager.GetUserId(HttpContext.User);
             tvm.Entries = _ctx.Tracker.GetEntriesForUser(Guid.Parse(userId));
             tvm.SportsList = _ctx.Tracker.GetSportsList();
+            ViewBag.PieData = new ChartData();
+            GeneratePieItemsFromTracker(tvm, ViewBag.PieData);
+            ViewBag.PieData.Title = "Proportions d'entrées des sports";
             return View(tvm);
         }
 
@@ -79,6 +82,9 @@ namespace MyTryHard.Controllers
             tvm.Entries = _ctx.Tracker.GetEntriesForUserAndSport(Guid.Parse(userId), sportId);
             tvm.SportsList = _ctx.Tracker.GetSportsList();
             ViewBag.SportId = sportId;
+            ViewBag.PieData = new ChartData();
+            GeneratePieItemsFromTracker(tvm, ViewBag.PieData);
+
             return View("Index", tvm);
         }
 
@@ -95,8 +101,14 @@ namespace MyTryHard.Controllers
             tvm.SportsList = _ctx.Tracker.GetSportsList();
 
             ChartData pie = new ChartData();
+            GeneratePieItemsFromTracker(tvm, pie);
 
-            foreach(KeyValuePair<int, string> kvp in tvm.SportsList)
+            return PartialView("Chart/PieChart", pie);
+        }
+
+        private static void GeneratePieItemsFromTracker(TrackerViewModel tvm, ChartData pie)
+        {
+            foreach (KeyValuePair<int, string> kvp in tvm.SportsList)
             {
                 double value = tvm.Entries.Where(x => x.SportId == kvp.Key).Count();
                 if (value == 0)
@@ -109,9 +121,6 @@ namespace MyTryHard.Controllers
                 slice.Color = ChartItem.GetColorFromId(kvp.Key);
                 pie.Items.Add(slice);
             }
-
-            return PartialView("Chart/PieChart", pie);
-            //return PartialView("SportsDistributionGraph", pie);
         }
     }
 }
