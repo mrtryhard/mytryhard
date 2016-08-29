@@ -4,52 +4,63 @@
 
 <div id="tracker">
     <h1>Fitness Tracker</h1>
-    <p>
-        Le Fitness Tracker permet d'enregistrer vos performance et
-        de générer les statistiques par rapport à ceux-ci.
-    </p>
-    <div class="sport-graph">
-        @if (ViewBag.SportId == null)
-        {
-            // Show Pie Chart of sports distribution.
-            @Html.PieChartFor(ViewBag.PieData as ChartData, "sportDistributionGraph", 350, 250)
-        }
-        else
-        {
-            // Show performance chart.
+    @if (ViewBag.SportId != null)
+    {
+        <h2>@Model.SportsList.First(x => x.Key == @ViewBag.SportId).Value</h2>
+    }
+    else
+    {
+        <p>
+            Le Fitness Tracker permet d'enregistrer vos performance et
+            de générer les statistiques par rapport à ceux-ci.
+        </p>
+    }
 
-        }
-    </div>
-    <div class="tracker-global-stats">
-        @{
-            TimeSpan tsTotalTime = new TimeSpan(Model.Entries.Sum(x => (x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks)));
-        }
-        <strong>Temps total suivi:</strong> @tsTotalTime.TotalDays.ToString("0") jours @tsTotalTime.Hours heures @tsTotalTime.Minutes minutes @tsTotalTime.Seconds secondes et @tsTotalTime.Milliseconds ms
-        <br />
-        <strong>Distance totale accomplie:</strong> @Model.Entries.Sum(x => x.Distance).ToString("##,####") mètres
-        <br />
-        @if (ViewBag.SportId != null)
-        {
-            TimeSpan tsTimePerMeter = new TimeSpan(Model.Entries.Sum(x => (x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks)) / Model.Entries.Sum(x => x.Distance));
-            TimeSpan tsAverageTime = new TimeSpan(Model.Entries.Sum(x => x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks) / Model.Entries.Count);
-            TimeSpan tsMedianTime = new TimeSpan(Model.Entries.Select(x => x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks).ElementAt(Model.Entries.Count / 2));
-            int averageDistancePerEntry = Model.Entries.Sum(x => x.Distance) / Model.Entries.Count;
-            int modeDistanceForEntries = Model.Entries.GroupBy(g => g.Distance).OrderByDescending(o => o.Count()).Select(s => s.Key).First();
+    @if (Model.Entries.Count != 0)
+    {
+        <div class="sport-graph">
+            @if (ViewBag.SportId == null)
+            {
+                // Show Pie Chart of sports distribution.
+                @Html.PieChartFor(ViewBag.PieData as ChartData, "sportDistributionGraph", 350, 250)
+            }
+            else
+            {
+                // Show performance chart.
+
+            }
+        </div>
+        <div class="tracker-global-stats">
+            @{
+                TimeSpan tsTotalTime = new TimeSpan(Model.Entries.Sum(x => (x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks)));
+            }
+            <strong>Temps total suivi:</strong> @tsTotalTime.TotalDays.ToString("0") jours @tsTotalTime.Hours heures @tsTotalTime.Minutes minutes @tsTotalTime.Seconds secondes et @tsTotalTime.Milliseconds ms
             <br />
-            <text><strong>Distance moyenne par suivi:</strong> @averageDistancePerEntry.ToString("##,###") mètres</text>
+            <strong>Distance totale accomplie:</strong> @Model.Entries.Sum(x => x.Distance).ToString("##,####") mètres
             <br />
-            <text><strong>Distance la plus parcourue:</strong> @modeDistanceForEntries.ToString("##,###") mètres</text>
-            <br />
-            <br />
-            <text><strong>Temps moyen par mètre:</strong> @tsTimePerMeter.Seconds secondes @tsTimePerMeter.Milliseconds ms</text>
-            <br />
-            <text><strong>Temps moyen total:</strong> @tsAverageTime.Hours heures @tsAverageTime.Minutes minutes @tsAverageTime.Seconds secondes @tsAverageTime.Milliseconds ms</text>
-            <br />
-            <text><strong>Temps médian:</strong> @tsMedianTime.Hours heures @tsMedianTime.Minutes minutes @tsMedianTime.Seconds secondes @tsMedianTime.Milliseconds ms</text>
-            <br />
-            <br />
-        }
-    </div>
+            @if (ViewBag.SportId != null)
+            {
+                TimeSpan tsTimePerMeter = new TimeSpan(Model.Entries.Sum(x => (x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks)) / Model.Entries.Sum(x => x.Distance));
+                TimeSpan tsAverageTime = new TimeSpan(Model.Entries.Sum(x => x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks) / Model.Entries.Count);
+                TimeSpan tsMedianTime = new TimeSpan(Model.Entries.Select(x => x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks).ElementAt(Model.Entries.Count / 2));
+                int averageDistancePerEntry = Model.Entries.Sum(x => x.Distance) / Model.Entries.Count;
+                int modeDistanceForEntries = Model.Entries.GroupBy(g => g.Distance).OrderByDescending(o => o.Count()).Select(s => s.Key).First();
+                <br />
+                <text><strong>Distance moyenne par suivi:</strong> @averageDistancePerEntry.ToString("##,###") mètres</text>
+                <br />
+                <text><strong>Distance la plus parcourue:</strong> @modeDistanceForEntries.ToString("##,###") mètres</text>
+                <br />
+                <br />
+                <text><strong>Temps moyen par mètre:</strong> @tsTimePerMeter.Seconds secondes @tsTimePerMeter.Milliseconds ms</text>
+                <br />
+                <text><strong>Temps moyen total:</strong> @tsAverageTime.Hours heures @tsAverageTime.Minutes minutes @tsAverageTime.Seconds secondes @tsAverageTime.Milliseconds ms</text>
+                <br />
+                <text><strong>Temps médian:</strong> @tsMedianTime.Hours heures @tsMedianTime.Minutes minutes @tsMedianTime.Seconds secondes @tsMedianTime.Milliseconds ms</text>
+                <br />
+                <br />
+            }
+        </div>
+    }
     <div>
         <a asp-action="add" title="Ajouter un temps">Ajouter un suivi</a>
         <form asp-controller="tracker" asp-action="entriesredirect" method="get" role="form" style="float:right;">
@@ -74,7 +85,7 @@
     @if (Model.Entries.Count == 0)
     {
         <p class="message">
-            Aucun suivi entré!
+            Aucun suivi ajouté!
         </p>
     }
     else
@@ -89,7 +100,7 @@
             <tr class="explanation">
                 <td></td>
                 <td><em>(aa-mm-jj)</em></td>
-                <td><em>(hh:mm:ss:uu)</em></td>
+                <td><em>(jours heures minutes secondes)</em></td>
                 <td><em>mètres</em></td>
             </tr>
 
@@ -98,7 +109,7 @@
                 <tr class="entry">
                     <td>@entry.SportName</td>
                     <td>@entry.DateTimeStart.Date.ToString("yyyy-MM-dd")</td>
-                    <td>@entry.DateTimeEnd.Subtract(entry.DateTimeStart).ToString("h\\h\\ mm\\m\\ ss\\.fff\\s")</td>
+                    <td>@entry.DateTimeEnd.Subtract(entry.DateTimeStart).ToString("d\\j\\ h\\h\\ mm\\m\\ ss\\.fff\\s")</td>
                     <td>@entry.Distance </td>
                 </tr>
             }
