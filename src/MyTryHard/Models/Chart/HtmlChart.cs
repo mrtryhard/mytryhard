@@ -53,7 +53,7 @@ namespace MyTryHard.Models.Chart
             double startAngle = 0, endAngle = 0;
             string css = "<style type=\"text/css\">" +
                 ".slice:hover {" +
-                "filter: brightness(120 %) drop-shadow(0.4em 0.4em 2px rgba(0, 0, 0, 0.5));" +
+                "filter: brightness(120%) drop-shadow(0.4em 0.4em 2px rgba(0, 0, 0, 0.5));" +
                 "stroke: #00B2EE;" +
                 "stroke-width: 2;" +
                 "}" +
