@@ -18,18 +18,20 @@
 
     @if (Model.Entries.Count != 0)
     {
-        <div class="sport-graph">
-            @if (ViewBag.SportId == null)
-            {
-                // Show Pie Chart of sports distribution.
-                @Html.PieChartFor(ViewBag.PieData as ChartData<string, double>, "sportDistributionGraph", 350, 250)
-            }
-            else
-            {
-                // Show performance chart.
 
-            }
-        </div>
+        @if (ViewBag.SportId == null)
+        {
+            // Show Pie Chart of sports distribution.
+            <div class="sport-graph">
+                @Html.PieChartFor(ViewBag.PieData as ChartData<string, double>, "sportDistributionGraph", 350, 250)
+            </div>
+        }
+        else
+        {
+            // TODO: Show performance chart.
+
+        }
+
         <div class="tracker-global-stats">
             @{
                 TimeSpan tsTotalTime = new TimeSpan(Model.Entries.Sum(x => (x.DateTimeEnd.Ticks - x.DateTimeStart.Ticks)));
@@ -60,7 +62,7 @@
                 <br />
             }
         </div>
-    }
+                }
     <div>
         <a asp-action="add" title="Ajouter un temps">Ajouter un suivi</a>
         <form asp-controller="tracker" asp-action="entriesredirect" method="get" role="form" style="float:right;">
