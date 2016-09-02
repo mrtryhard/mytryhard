@@ -188,7 +188,6 @@ namespace MyTryHard.Bll
             }
         }
 
-        // TODO: FIX
         /// <summary>
         /// Gets the articles count for a given category.
         /// </summary>

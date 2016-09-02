@@ -32,7 +32,7 @@ namespace MyTryHard.Controllers
             var userId = _userManager.GetUserId(HttpContext.User);
             tvm.Entries = _ctx.Tracker.GetEntriesForUser(Guid.Parse(userId));
             tvm.SportsList = _ctx.Tracker.GetSportsList();
-            ViewBag.PieData = new ChartData();
+            ViewBag.PieData = new ChartData<string, double>();
             GeneratePieItemsFromTracker(tvm, ViewBag.PieData);
             ViewBag.PieData.Title = "Proportions de suivi des sports";
             return View(tvm);
@@ -82,8 +82,6 @@ namespace MyTryHard.Controllers
             tvm.Entries = _ctx.Tracker.GetEntriesForUserAndSport(Guid.Parse(userId), sportId);
             tvm.SportsList = _ctx.Tracker.GetSportsList();
             ViewBag.SportId = sportId;
-            ViewBag.PieData = new ChartData();
-            GeneratePieItemsFromTracker(tvm, ViewBag.PieData);
 
             return View("Index", tvm);
         }
@@ -100,13 +98,13 @@ namespace MyTryHard.Controllers
             tvm.Entries = _ctx.Tracker.GetEntriesForUser(Guid.Parse(userId));
             tvm.SportsList = _ctx.Tracker.GetSportsList();
 
-            ChartData pie = new ChartData();
+            ChartData<string, double> pie = new ChartData<string, double>();
             GeneratePieItemsFromTracker(tvm, pie);
 
             return PartialView("Chart/PieChart", pie);
         }
 
-        private static void GeneratePieItemsFromTracker(TrackerViewModel tvm, ChartData pie)
+        private static void GeneratePieItemsFromTracker(TrackerViewModel tvm, ChartData<string, double> pie)
         {
             foreach (KeyValuePair<int, string> kvp in tvm.SportsList)
             {
@@ -114,11 +112,12 @@ namespace MyTryHard.Controllers
                 if (value == 0)
                     continue;
 
-                ChartItem slice = new ChartItem();
-                slice.Value = value;
-                slice.DisplayValue = value.ToString();
-                slice.Label = kvp.Value;
-                slice.Color = ChartItem.GetColorFromId(kvp.Key);
+                ChartItem<string, double> slice = new ChartItem<string, double>();
+                slice.ValueY = value;
+                slice.LabelY = kvp.Value;
+                slice.ValueX = kvp.Value;
+                slice.LabelX = kvp.Value;
+                slice.Color = ChartColorHelper.GetColorFromId(kvp.Key);
                 pie.Items.Add(slice);
             }
         }

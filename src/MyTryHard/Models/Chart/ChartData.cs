@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MyTryHard.Models.Chart
 {
-    public class ChartData
+    public class ChartData<AxisXT, AxisYT>
     {
-        public ChartData() : this("", new List<ChartItem>())
+        public ChartData() : this("", new List<ChartItem<AxisXT, AxisYT>>())
         { }
 
-        public ChartData(string title, List<ChartItem> items) : this(title, "", items)
+        public ChartData(string title, List<ChartItem<AxisXT, AxisYT>> items) : this(title, "", items)
         { }
 
-        public ChartData(string title, string caption, List<ChartItem> items)
+        public ChartData(string title, string caption, List<ChartItem<AxisXT, AxisYT>> items)
         {
             Title = title;
             Items = items;
@@ -24,6 +21,6 @@ namespace MyTryHard.Models.Chart
         public ChartPosition TitlePosition { get; set; }
         public string Title { get; set; }
         public string Caption { get; set; }
-        public List<ChartItem> Items { get; set; }
+        public List<ChartItem<AxisXT, AxisYT>> Items { get; set; }
     }
 }

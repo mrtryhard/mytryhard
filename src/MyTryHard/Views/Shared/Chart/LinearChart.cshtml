@@ -1,0 +1,60 @@
+﻿@model MyTryHard.Models.Chart.ChartData
+@using MyTryHard.Models.Chart
+@using MyTryHard.Helpers
+
+<svg @(ViewData["id"] != null ? "id=\"" + ViewData["id"] + "\"" : "")
+     height="@(ViewData["height"] ?? 510)"
+     width="@(ViewData["width"] ?? 800)"
+     viewBox="0, 0, 800, 610"
+     preserveAspectRatio="xMinYMin meet">
+    <style type="text/css">
+        text {
+            font-family: "Open Sans", Tahoma, serif;
+        }
+
+        g text {
+            font-size: 1.4rem;
+        }
+
+        text.title {
+            fill: black;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+    </style>
+    @{
+        // TODO
+        // Text size might as well be dynamic, depending of quantity of items... 
+        const double xLabelsRotation = 0;
+        const double yLabelsRotation = 0;
+
+        int titleX = 0;
+
+        @if (Model.Title != "")
+        {
+            if (Model.TitlePosition == ChartPosition.Top)
+            {
+                <text>
+                <g>
+                    <text class="title" x="@titleX" y="35">@Model.Title</text>
+                </g>
+                </text>
+            }
+        }
+
+        // Entries type grouping.
+        var groupedEntries = Model.Items.GroupBy(x => x.Group);
+
+        // Y Axis 
+        double maxEntriesValue = groupedEntries.Max(x => x.Max(y => y.Value));
+        double minEntriesValue = groupedEntries.Min(x => x.Max(y => y.Value));
+
+        // X Axis
+        // We'll assume that the items are ordered...
+        // We have a problem coming from the fact that since we trust "labels", 
+        // We cannot calculate the gap between each elements. E.g. 1 ... 3 4 5 6
+        // Eventually need another way to get that.
+        int labelCounts = Model.Items.Count;
+
+    }
+</svg>

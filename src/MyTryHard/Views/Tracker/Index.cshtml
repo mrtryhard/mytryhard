@@ -22,7 +22,7 @@
             @if (ViewBag.SportId == null)
             {
                 // Show Pie Chart of sports distribution.
-                @Html.PieChartFor(ViewBag.PieData as ChartData, "sportDistributionGraph", 350, 250)
+                @Html.PieChartFor(ViewBag.PieData as ChartData<string, double>, "sportDistributionGraph", 350, 250)
             }
             else
             {
