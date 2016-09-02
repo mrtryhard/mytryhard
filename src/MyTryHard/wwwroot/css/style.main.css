@@ -610,3 +610,7 @@ tr.explanation {
     width: 350px; 
     border: 1px solid #777;
 }
+
+.tracker-global-stats {
+    margin: 10px 0;
+}
