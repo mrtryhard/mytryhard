@@ -88,13 +88,45 @@ namespace MyTryHard.Models.Chart
 
             lastTextHeight += heightOffset;
 
-            // TODO add css
-            foreach (ChartItem<U, T> item in data.Items)
+            if (data.Items.Count == 1)
             {
-                string d = GetDForPath(ref startAngle, ref endAngle, heightOffset, anglePerValue, Convert.ToDouble(item.ValueY));
-                TagBuilder itemBuilder = generateItem(item, d, textAlign, lastTextHeight, totalValues);
-                svgBuilder.InnerHtml.AppendHtml(itemBuilder);
-                lastTextHeight += lastTextOffset;
+                ChartItem<U, T> item = data.Items.First();
+
+                // Special case because arcs cant close themselves on 360°. 
+                TagBuilder gElem = new TagBuilder("g");
+                TagBuilder circle = new TagBuilder("circle");
+                circle.MergeAttribute("cx", radOffset.NumString());
+                circle.MergeAttribute("cy", (250 + heightOffset).ToString());
+                circle.MergeAttribute("r", 250.ToString());
+                circle.MergeAttribute("fill", item.Color.HexCode());
+                circle.MergeAttribute("stroke", "black");
+                circle.MergeAttribute("stroke-width", "1");
+
+                TagBuilder titleBuilder = new TagBuilder("title");
+                titleBuilder.InnerHtml.AppendFormat("{0} ({1})", item.LabelY, item.ValueY);
+
+                TagBuilder bulletBuilder = generateTextBullet("■", item.Color, textAlign - 25, lastTextHeight - 1);
+                TagBuilder labelBuilder = generateLabel(
+                    string.Format("{0} - {1} ({2})", (Convert.ToDouble(item.ValueY) / totalValues).ToString("0.00 %"), item.LabelY, item.ValueY),
+                    textAlign, lastTextHeight);
+
+                // title and bullet
+                gElem.InnerHtml.AppendHtml(titleBuilder);
+                gElem.InnerHtml.AppendHtml(bulletBuilder);
+                gElem.InnerHtml.AppendHtml(labelBuilder);
+
+                gElem.InnerHtml.AppendHtml(circle);
+                svgBuilder.InnerHtml.AppendHtml(gElem);
+            }
+            else
+            {
+                foreach (ChartItem<U, T> item in data.Items)
+                {
+                    string d = GetDForPath(ref startAngle, ref endAngle, heightOffset, anglePerValue, Convert.ToDouble(item.ValueY));
+                    TagBuilder itemBuilder = generateItem(item, d, textAlign, lastTextHeight, totalValues);
+                    svgBuilder.InnerHtml.AppendHtml(itemBuilder);
+                    lastTextHeight += lastTextOffset;
+                }
             }
 
             return svgBuilder;
